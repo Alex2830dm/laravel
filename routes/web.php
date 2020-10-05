@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('index', function () {
+/*Route::get('index', function () {
     return view('index');
 });
 Route::get('MiPrimerLayout', function () {
@@ -25,4 +25,10 @@ Route::get('Inicio', function () {
 });
 Route::get('prueba', function () {
     return view('prueba');
-});
+});*/
+//Rutas Materias
+Route::resource('/HelloWorld', 'Materias\controllerMaterias');
+
+Route::get('/helloworld2', 'Controller@index');
+
+Route::get('/miprimerarray', '\Materias\controllerMaterias@getAlumnos()')->name(Alumnos);

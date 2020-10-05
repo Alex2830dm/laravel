@@ -10,4 +10,17 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    public function index(){
+        return view('HelloWorld');
+    }
+    public function getAlumnos(){
+        $Alumnos = array(
+            'nombre',
+            'apellido',
+            'correo',
+            'edad'
+        );
+        return Response::json($Alumnos);
+    }
 }

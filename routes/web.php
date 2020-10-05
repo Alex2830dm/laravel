@@ -31,4 +31,6 @@ Route::resource('/HelloWorld', 'Materias\controllerMaterias');
 
 Route::get('/helloworld2', 'Controller@index');
 
-Route::get('/miprimerarray', '\Materias\controllerMaterias@getAlumnos()')->name(Alumnos);
+Route::get('/miprimerarray', '\Materias\controllerMaterias@getAlumnos');
+
+Route::get('/Practica', 'controllerPracticas@index');

@@ -1,30 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Materias;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Usuarios;
+use App\Http\Requests\Usuarios as UsuariosRequests;
 
-class controllerMaterias extends Controller
+class controllerUsuarios extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getAlumnos(){
-        $Alumnos = array(
-            'nombre',
-            'apellido',
-            'correo',
-            'edad'
-        );
-        return Response::json($Alumnos);
+
+    protected $usuarios;
+    public function _construct (Usuarios $usuarios){
+        $this->usuarios = $usuarios;
     }
+    public function list(){
+        $datos['usuarios']=Usuarios::paginate(5);
+        return view("usuarios.lista", $datos);
+
+    }     
     public function index()
     {
-        //
-        return view('HelloWorld');    
+        //$datos['practica']=Practica::paginate(5);
+        //return view("crud.index", $datos);
+        return view('usuarios.formulario');
     }
 
     /**
@@ -45,7 +49,21 @@ class controllerMaterias extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request;
+        //$datos = request()->all();
+        //$usuarios = $this->usuarios->create($request->all());
+        //return response()->json($usuarios);
+        //$usuarios = request()->except('_token');
+        //Usuarios::insert($usuarios);
+        //return response()->json($usuarios);
+        $usuarios = new Usuarios;
+        $usuarios->nombre = request('nombre');
+        $usuarios->apellido = request('apellido');        
+        $usuarios->correo = request('correo');
+        $usuarios->password = request('password');
+        $usuarios->telefono = request('telefono');
+        $usuarios->save();
+        return redirect('proyecto/usuarios/lista');
     }
 
     /**
@@ -90,6 +108,7 @@ class controllerMaterias extends Controller
      */
     public function destroy($id)
     {
-        //
+        Usuarios::destroy($id);
+        return redirect('proyecto/usuarios/lista');
     }
 }

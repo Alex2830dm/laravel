@@ -2,7 +2,7 @@
 @section('title', 'Alex')
 @section('content')
   <h1>Registro de Usuarios</h1><br>
-  <form action="{{url('proyecto/registro')}}" method="POST">
+  <form action="{{url('proyecto/usuarios/registro')}}" method="POST">
     @csrf
     <div class="row">
       <div class="col-4">

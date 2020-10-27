@@ -1,30 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Materias;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-class controllerMaterias extends Controller
+Use App\Doctores;
+class controllerDoctores extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getAlumnos(){
-        $Alumnos = array(
-            'nombre',
-            'apellido',
-            'correo',
-            'edad'
-        );
-        return Response::json($Alumnos);
-    }
+    public function list(){
+        $datos['doctores']=Doctores::paginate(5);
+        return view("doctores.lista", $datos);
+
+    }  
     public function index()
     {
-        //
-        return view('HelloWorld');    
+        return view('doctores.formulario');
     }
 
     /**
@@ -45,7 +39,14 @@ class controllerMaterias extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $doctores = new Doctores;
+        $doctores->nombre = request('nombre');
+        $doctores->apellido = request('apellido');        
+        $doctores->correo = request('correo');
+        $doctores->cedula = request('cedula');
+        $doctores->telefono = request('telefono');
+        $doctores->save();
+        return redirect('proyecto/doctores/lista');
     }
 
     /**

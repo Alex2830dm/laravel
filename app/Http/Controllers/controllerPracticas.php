@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+Use App\Alumno;
+Use App\Practica;
+Use App\Materias;
+//Mandamos a llamar a nuestro modelo
+Use App\Http\Requests\Practica as PracticaRequests;
+//mandamos a llamar al request Practica 
 class controllerPracticas extends Controller
 {
     /**
@@ -11,10 +16,21 @@ class controllerPracticas extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    protected $datos;
+    public function _construct (Practica $datos){
+        $this->practica = $datos;
+    } 
+    public function list(){
+        $datos['practicas']=Practica::paginate(5);
+        return view("crud.lista", $datos);
+
+    }     
     public function index()
     {
-        //
-        return view('practica'); 
+        
+        $datos=Practica::all();
+        return response()->json([$datos]);
     }
 
     /**
@@ -25,6 +41,7 @@ class controllerPracticas extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -33,9 +50,20 @@ class controllerPracticas extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(PracticaRequests $request){        
+        
+        //$usuarios = $this->practica->create($request->all());
+        //return reponse()->json($usuarios);
+        //$usuarios = request()->except('_token');
+        //Practica::insert($usuarios);
+        //return response()->json($usuarios);
+        $usuarios = new Practica;
+        $usuarios->nombre = request('nombre');
+        $usuarios->apellido = request('apellido');
+        $usuarios->edad = request('edad');
+        $usuarios->correo = request('correo');
+        $usuarios->save();
+        return redirect('practica/lista');
     }
 
     /**
@@ -46,7 +74,8 @@ class controllerPracticas extends Controller
      */
     public function show($id)
     {
-        //
+        $datos = Alumno::find($id);
+        return $datos;
     }
 
     /**
@@ -80,6 +109,7 @@ class controllerPracticas extends Controller
      */
     public function destroy($id)
     {
-        //
+        Practica::destroy($id);
+        return 'El registro fue eliminado';
     }
 }

@@ -11,26 +11,34 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
-/*Route::get('index', function () {
-    return view('index');
+Route::group(['prefix'=>'proyecto/usuarios'], function(){
+    Route::get('formulario', 'controllerUsuarios@index');//formulario de registro de usuarios
+    Route::post('registro', 'controllerUsuarios@store');//registro de usuarios
+    Route::get('lista', 'controllerUsuarios@list');//listado de registro
+    Route::delete('eliminar/{id}', 'controllerUsuarios@destroy')->name('delete');
 });
-Route::get('MiPrimerLayout', function () {
-    return view('MiPrimerLayout');
-});
-Route::get('Inicio', function () {
-    return view('Inicio');
-});
-Route::get('prueba', function () {
-    return view('prueba');
-});*/
-//Rutas Materias
-Route::resource('/HelloWorld', 'Materias\controllerMaterias');
+Route::group(['prefix'=>'proyecto/doctores'], function(){
+    Route::get('formulario', 'controllerDoctores@index');//formulario de registro de usuarios
+    Route::post('registro', 'controllerDoctores@store');//registro de usuarios
+    Route::get('lista', 'controllerDoctores@list');//listado de registro
+    Route::delete('eliminar/{id}', 'controllerUsuarios@destroy')->name('eliminar');
+});   
+Route::group(['prefix'=>'practica'], function(){
+    Route::get('formulario', function () {return view('practica');}); //Formato de registro
+    Route::post('formato', 'controllerPracticas@store'); //registro de datos    
+    Route::get('lista', 'controllerPracticas@list'); //listado de registros
+    Route::delete('eliminar/{id}', 'controllerPracticas@destroy')->name('delete'); //delete de un registro
+        
+});    
 
-Route::get('/helloworld2', 'Controller@index');
 
-Route::get('/miprimerarray', '\Materias\controllerMaterias@getAlumnos');
 
-Route::get('/Practica', 'controllerPracticas@index');
+
+
+?>
+

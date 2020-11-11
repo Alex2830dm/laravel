@@ -13,12 +13,14 @@ class CreatePracticaTable extends Migration
      */
     public function up()
     {
-        Schema::create('practica', function (Blueprint $table) {
+        Schema::create('practicas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('nombre');
             $table->String('apellido');
             $table->integer('edad');
             $table->String('correo');
+            $table->Integer('id_materia');
+            $table->String('nombre_materia');
             $table->timestamps();        
         });
     }
@@ -30,6 +32,6 @@ class CreatePracticaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('practica');
+        Schema::dropIfExists('practicas');
     }
 }

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-Use App\Alumno;
 Use App\Practica;
-Use App\Materias;
 //Mandamos a llamar a nuestro modelo
 Use App\Http\Requests\Practica as PracticaRequests;
 //mandamos a llamar al request Practica 
@@ -24,7 +22,6 @@ class controllerPracticas extends Controller
     public function list(){
         $datos['practicas']=Practica::paginate(5);
         return view("crud.lista", $datos);
-
     }     
     public function index()
     {
@@ -62,6 +59,8 @@ class controllerPracticas extends Controller
         $usuarios->apellido = request('apellido');
         $usuarios->edad = request('edad');
         $usuarios->correo = request('correo');
+        $usuarios->id_materia = request('id_materia');
+        $usuarios->nombre_materia = request('nombre_materia');
         $usuarios->save();
         return redirect('practica/lista');
     }
@@ -86,7 +85,9 @@ class controllerPracticas extends Controller
      */
     public function edit($id)
     {
-        //
+        //$datos = Practica::findOrFail($id);
+        //return view('modificar', compact('datos'));
+        return view('modificar', ['usuario'=> Practica::findOrFail($id)]);
     }
 
     /**
@@ -96,9 +97,16 @@ class controllerPracticas extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PracticaRequests $request, $id)
     {
-        //
+        $usuarios = Practica::findOrFail($id);
+        $usuarios->nombre = $request->get('nombre');
+        $usuarios->apellido = $request->get('apellido');
+        $usuarios->edad = $request->get('edad');
+        $usuarios->correo = $request->get('correo');
+        $usuarios->update();
+        return redirect('practica/lista');
+        //return response()->json("Kioña, Kioña");
     }
 
     /**

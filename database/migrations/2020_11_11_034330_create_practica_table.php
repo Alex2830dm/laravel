@@ -13,15 +13,17 @@ class CreatePracticaTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('practicas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('nombre');
             $table->String('apellido');
             $table->integer('edad');
             $table->String('correo');
-            $table->Integer('id_materia');
+            $table->unsignedBigInteger('id_materia');
             $table->String('nombre_materia');
-            $table->timestamps();        
+            $table->foreign('id_materia')->references('id')->on('materias');
+            $table->timestamps();            
         });
     }
 

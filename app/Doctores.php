@@ -16,4 +16,7 @@ class Doctores extends Model
             'telefono' => 'requiried| min:5 |max:50'
         ];
     }
+    public function usuarios(){                
+        return $this->belongsToMany(Usuarios::class, 'agenda', 'id_doctor', 'id_usuario');
+    } 
 }

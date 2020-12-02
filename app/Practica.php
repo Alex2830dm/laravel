@@ -14,5 +14,5 @@ class Practica extends Model
             'edad' => 'requiried|integer| min:5 |max:50',
             'correo' => 'requiried| min:5 |max:50',
         ];
-    }    
+    }
 }

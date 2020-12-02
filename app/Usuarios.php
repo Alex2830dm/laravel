@@ -15,5 +15,8 @@ class Usuarios extends Model
             'password' => 'requiried| min:5 |max:50',
             'telefono' => 'requiried| min:5 |max:50'
         ];
+    }
+    public function doctores(){                
+        return $this->belongsToMany(Doctores::class, 'agenda', 'id_usuario', 'id_doctor');
     } 
 }

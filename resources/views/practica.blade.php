@@ -40,12 +40,12 @@
           <select aria-label="criterio" name="id_materia" id="id_materia"  class=" form-control">
             <option value="1">Programacion Orientada a Objetos</option>
             <option value="2">Aplicaciones Web Orientada a Servidores</option>
-            <option value="3">Diseño de Aplicaciones</option>
+            <option value="5">Diseño de Aplicaciones</option>
           </select>
         </div>
         <div class="col-4">
           <label for="nombremateria">Confirma el nombre de la materia</label>
-          <input type="text" name="nombre_materia" id="id_materia" class="form-control">
+          <input type="text" name="nombre_materia" id="nombre_materia" class="form-control">
         </div>
       </div>
       <input type="submit" class="btn btn-outline-success" value="Agregar">

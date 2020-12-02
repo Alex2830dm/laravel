@@ -24,10 +24,10 @@
             </tr>
         </tead>
         <tbody>
-            @foreach($practicas as $practica)
+            @foreach($materias as $materia)
                 <tr>                
-                    <td>{{$practica->id}}</td>
-                    <td>{{$practica->nombre}}</td>                                
+                    <td>{{$materia->id}}</td>
+                    <td>{{$materia->nombre}}</td>                                
                 </tr>
             @endforeach        
         </tbody>

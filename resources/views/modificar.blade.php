@@ -11,7 +11,7 @@
         </ul>
     </div>
 @endif
-  <form action="{{url('practica/actualizar', $usuario->id)}}" method="POST">  
+  <form action="{{url('practica/actualizar'. $usuario->id}}" method="POST">  
     @csrf
     {{method_field('PATCH')}}
     <div class="row">

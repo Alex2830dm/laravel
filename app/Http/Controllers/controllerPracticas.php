@@ -48,12 +48,6 @@ class controllerPracticas extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PracticaRequests $request){        
-        
-        //$usuarios = $this->practica->create($request->all());
-        //return reponse()->json($usuarios);
-        //$usuarios = request()->except('_token');
-        //Practica::insert($usuarios);
-        //return response()->json($usuarios);
         $usuarios = new Practica;
         $usuarios->nombre = request('nombre');
         $usuarios->apellido = request('apellido');
@@ -62,7 +56,8 @@ class controllerPracticas extends Controller
         $usuarios->id_materia = request('id_materia');
         $usuarios->nombre_materia = request('nombre_materia');
         $usuarios->save();
-        return redirect('practica/lista');
+        //return redirect('practica/lista');
+        return response()->json($usuarios);
     }
 
     /**
@@ -84,9 +79,7 @@ class controllerPracticas extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //$datos = Practica::findOrFail($id);
-        //return view('modificar', compact('datos'));
+    {        
         return view('modificar', ['usuario'=> Practica::findOrFail($id)]);
     }
 
@@ -97,6 +90,11 @@ class controllerPracticas extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function update(PracticaRequests $request, Practica $id){
+        $id->update($request->all());
+        return response()->json('El Registro Fue Actulizado',$id);
+    }
+    /*
     public function update(PracticaRequests $request, $id)
     {
         $usuarios = Practica::findOrFail($id);
@@ -104,10 +102,11 @@ class controllerPracticas extends Controller
         $usuarios->apellido = $request->get('apellido');
         $usuarios->edad = $request->get('edad');
         $usuarios->correo = $request->get('correo');
-        $usuarios->update();
-        return redirect('practica/lista');
-        //return response()->json("Kioña, Kioña");
-    }
+        $usuarios->id_materia = request('id_materia');
+        $usuarios->nombre_materia = request('nombre_materia');
+        $usuarios->update();    
+        return response()->json($usuarios);
+    }*/
 
     /**
      * Remove the specified resource from storage.

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\materias;
+use App\Rutas;
 use Illuminate\Http\Request;
 
-class MateriasController extends Controller
+class RutasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,6 @@ class MateriasController extends Controller
     {
         //
     }
-    public function list(){
-        $datos['materias']=materias::paginate(5);
-        return view("materias", $datos);
-    }  
 
     /**
      * Show the form for creating a new resource.
@@ -39,21 +35,17 @@ class MateriasController extends Controller
      */
     public function store(Request $request)
     {
-        $materias = new materias;
-        $materias->nombre = request('nombre');
-        $materias->save();
-        //return redirect('practica/materias');
-        return response()->json($materias);
-
+        $company = Company::create($request->all());
+        return redirect()->route('rutas');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\materias  $materias
+     * @param  \App\Rutas  $rutas
      * @return \Illuminate\Http\Response
      */
-    public function show(materias $materias)
+    public function show(Rutas $rutas)
     {
         //
     }
@@ -61,10 +53,10 @@ class MateriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\materias  $materias
+     * @param  \App\Rutas  $rutas
      * @return \Illuminate\Http\Response
      */
-    public function edit(materias $materias)
+    public function edit(Rutas $rutas)
     {
         //
     }
@@ -73,10 +65,10 @@ class MateriasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\materias  $materias
+     * @param  \App\Rutas  $rutas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, materias $materias)
+    public function update(Request $request, Rutas $rutas)
     {
         //
     }
@@ -84,10 +76,10 @@ class MateriasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\materias  $materias
+     * @param  \App\Rutas  $rutas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(materias $materias)
+    public function destroy(Rutas $rutas)
     {
         //
     }

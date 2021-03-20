@@ -1,0 +1,58 @@
+@extends('layouts.app')
+@section('content')
+<script type="text/javascript">                        
+    $(document).ready(function(){
+        var close = '';
+        var after = '';
+        //--------------------------------------
+        $("button").click(function(){
+            $("#info"+close).text('');
+            after = close;
+                //console.log('*'+after);
+            
+            close = $(this).attr("id");
+  
+  
+            var id_usuario = $(this).attr("id");
+            
+            if(close == after){
+                $("#info"+ after).text('');
+                close = '';
+            }else{
+                $("#info"+id_usuario).load('js02?id_usuario=' + id_usuario).css({"background":"#FBE8E4"});
+            }
+        });
+    })
+</script>
+<table class="table table-hover">
+    @foreach ($doctor as $doctor)
+    <thead>
+        <tr>
+            <th scope="col">ID Usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Perfil</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>        
+        <tr id="{{$doctor->id_usuario}}">
+                <td>{{$doctor->id_usuario}}</td>
+                <td>{{$doctor->nombre}} {{$doctor->primer_apellido}}</td>
+                <td>{{$doctor->telefono}}</td>
+                <td>{{$doctor->perfil}}</td>
+                <td>
+                    <button class="btn btn-outline-secondary btn-sm" id="{{$doctor->id_usuario}}">
+                        Ver Más Detalles
+                    </button>
+                </td>
+        </tr>
+        <tr id="{{$doctor->id_usuario}}">
+            <td colspan="6">
+              <div id="info{{$doctor->id_usuario}}"></div> 
+            </td>
+          </tr> 
+    </tbody>
+    @endforeach
+  </table>
+@endsection

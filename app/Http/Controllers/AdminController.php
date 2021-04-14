@@ -204,7 +204,12 @@ class AdminController extends Controller
     public function historial($id){
         $tip_usu = session('session_tipo');        
         if($tip_usu == 1){
-            $datos    = CitasModel::where('id_usuario', $id)->orderBy('tipo_cita')->get();
+            $datos    = CitasModel::select('tb_citas.id_cita', 'tb_citas.nombre_paciente', 'tb_citas.fecha_cita', 'tb_citas.apellido_paciente',
+                                            'tb_citas.hora_cita', 'tb_citas.estatus', 'tb_citas.tipo_cita',
+                                            'tb_usuarios.nombre', 'tb_usuarios.apellido_paterno')
+                                    ->join('tb_usuarios', 'tb_citas.id_medico', '=', 'tb_usuarios.id_usuario')
+                                    ->where('tb_citas.id_usuario', '=', '1')
+                                    ->get();
             return view('admin.historial')->with(['datos' => $datos]);
             //return response()->json(['datos' => $datos]);        
         }

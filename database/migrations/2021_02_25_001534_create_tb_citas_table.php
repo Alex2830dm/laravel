@@ -23,7 +23,7 @@ class CreateTbCitasTable extends Migration
             $table->float('costo_cita', 10,2)->comment('Costo Cita');
             $table->date('fecha_cita')->comment('Fecha Cita');
             $table->time('hora_cita')->comment('Hora Cita');
-            $table->String('estatatus', 20)->comment('Estatus Cita');
+            $table->enum('estatus', ['pendiente', 'atentida'])->comment('Tipo Cita');
             $table->string('telefono_contacto', 15)->comment('Telefono Contacto');
             $table->string('direccion_calle', 60)->comment('Direccion Calle');
             $table->string('direccion_colonia', 60)->comment('Direccion Colonia');

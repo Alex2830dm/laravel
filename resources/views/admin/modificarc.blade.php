@@ -28,6 +28,7 @@
             <div class="col-4">
                 Selecciona el tipo de cita
                 <select name="tipo_cita" id="tipo_cita" class="form-control">
+                    <option value="{{$datos->tipo_cita}}">{{$datos->tipo_cita}}</option>
                     <option value=0> Selecciona un tipo de cita</option>
                     <option value=1> Consultorio </option>
                     <option value=2> Domicilio </option>

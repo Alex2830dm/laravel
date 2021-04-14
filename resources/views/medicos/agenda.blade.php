@@ -13,6 +13,7 @@
             <th scope="col">Paciente</th>
             <th scope="col">Tipo de Cita</th>
             <th scope="col">Fecha y Hora</th>
+            <th scope="col">Estatus</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -23,8 +24,9 @@
                 <td>{{$dato->nombre_paciente}} {{$dato->apellido_paciente}}</td>
                 <td>{{$dato->tipo_cita}}</td>                
                 <td>{{$dato->fecha_cita}} {{$dato->hora_cita}}</td>
+                <td>{{$dato->estatus}}</td>
                 <td>                                    
-                    <a href="{{url('medico/cita_paciente', $dato->id_cita)}}">
+                    <a href="{{url('medico/cita', $dato->id_cita)}}">
                       <button type="button" class="btn btn-outline-info btn-sm">
                         Atender Cita
                       </button>

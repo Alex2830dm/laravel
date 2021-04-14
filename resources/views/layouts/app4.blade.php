@@ -70,18 +70,18 @@
         </h6>
         <h6>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('quienes-somos')}}" role="button" aria-haspopup="true" aria-expanded="false">¿Quienes Somos?</a>
+            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('quienes_somos')}}" role="button" aria-haspopup="true" aria-expanded="false">¿Quienes Somos?</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{url('usuarios/quienes-somos')}}">¿Quienes Somos?</a>
-              <a class="dropdown-item" href="{{url('usuarios/unete-hs')}}">Unete a Healthceare System</a>              
+              <a class="dropdown-item" href="{{route('quienes_somos')}}">¿Quienes Somos?</a>
+              <a class="dropdown-item" href="{{route('informacion')}}">Unete a Healthceare System</a>              
             </div>
           </li>
         </h6>
         <h6>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('primeros-auxilios')}}" role="button" aria-haspopup="true" aria-expanded="false">Servicios</a>
+            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{route('primeros_auxilios')}}" role="button" aria-haspopup="true" aria-expanded="false">Servicios</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{url('usuarios/primeros-auxilios')}}">Primeros Auxilios</a>
+              <a class="dropdown-item" href="{{route('primeros_auxilios')}}">Primeros Auxilios</a>
               <a class="dropdown-item" href="{{route('emergencias')}}">Emergencias</a>                        
             </div>
           </li>

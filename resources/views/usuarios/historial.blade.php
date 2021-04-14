@@ -21,8 +21,8 @@
             <tr>
                 <td>{{$dato->id_cita}}</td>
                 <td>{{$dato->nombre_paciente}} {{$dato->apellido_paciente}}</td>
-                <td>{{$dato->fecha_cita}}</td>
-                <td>En espera</td>
+                <td>{{$dato->fecha_cita}} {{$dato->hora_cita}}</td>
+                <td>{{$dato->estatus}}</td>
                 <td>                                    
                   <a href="{{url('usuario/modificar_cita', $dato->id_cita)}}">
                     <button type="button" class="btn btn-outline-info btn-sm">

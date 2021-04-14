@@ -53,7 +53,7 @@
               <td>{{$usuario->id_usuario}}</td>
               <td><?php echo $usuario->apellido_paterno . ' ' . $usuario->apellido_materno . ' ' . $usuario->nombre; ?></td>
               <td>{{$usuario->telefono}}</td>
-              <td>{{$usuario->perfil}}</td>
+              <td>{{$usuario->perfil == 1? "Administrador":($usuario->perfil == 2? "Usuario" : "Medico")}}</td>
               <td>               
                 <button class="btn btn-outline-secondary btn-sm" id="{{$usuario->id_usuario}}">
                   Ver detalles

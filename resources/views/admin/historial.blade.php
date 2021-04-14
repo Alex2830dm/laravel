@@ -10,9 +10,10 @@
         <thead>
           <tr>
             <th scope="col">Folio Cita</th>
-            <th scope="col">Paciente</th>        
+            <th scope="col">Paciente</th>
+            <th scope="col">Fecha / Hora</th>
             <th scope="col">Estatus</th>
-            <th scope="col">Fecha</th>
+            <th scope="col">Tipo</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -21,8 +22,9 @@
             <tr>
                 <td>{{$dato->id_cita}}</td>
                 <td>{{$dato->nombre_paciente}} {{$dato->apellido_paciente}}</td>
-                <td>{{$dato->fecha_cita}}</td>
-                <td>En espera</td>
+                <td>{{$dato->fecha_cita}}  {{$dato->hora_cita}}</td>
+                <td>{{$dato->estatus}}</td>
+                <td>{{$dato->tipo_cita}}</td>
                 <td>                                    
                     <a href="{{url('admin/modificar_cita', $dato->id_cita)}}">
                       <button type="button" class="btn btn-outline-info btn-sm">

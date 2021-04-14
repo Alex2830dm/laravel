@@ -146,12 +146,7 @@
                 <a href="{{url('medico/historial/'.session('session_id'))}}" class="nav-link">
                   <p>Historial de Consultas</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>Agenda</p>
-                </a>
-              </li>
+              </li>              
             </ul>
           </li>          
           <li class="nav-item has-treeview">
@@ -170,7 +165,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{url('medico/pacientes/'. session('session_id'))}}" class="nav-link">
                   <p>Citas</p>
                 </a>
               </li>

@@ -7,6 +7,7 @@ use Auth;
 use App\Usuarios;
 use App\EmergenciasModel;
 use App\CitasModel;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {    
@@ -50,7 +51,8 @@ class AdminController extends Controller
         }        
     }
     public function usuarios(){
-        $usuarios['usuarios'] = Usuarios::all();
+        $usuarios = DB::table('tb_usuarios')                        
+                        ->groupBy('perfil')->get();
         return view('admin.usuarios', $usuarios);
     }
     public function registro(){
@@ -187,14 +189,14 @@ class AdminController extends Controller
         $cita->apellido_paciente = request('apellidos_paciente');
         $cita->tipo_cita = request('tipo_cita');
         $cita->costo_cita = request('costo_cita');
+        $cita->estatus = "pendiente";
         $cita->fecha_cita = request('fecha');
         $cita->hora_cita = request('hora');
         $cita->telefono_contacto = request('telefono_contacto');
         $cita->direccion_calle = request('direccion_calle');
         $cita->direccion_colonia = request('direccion_colonia');
         $cita->direccion_localidad = request('direccion_localidad');
-        $cita->direccion_municipio = request('direccion_municipio');
-        $cita->direccion_estado = request('direccion_estado');
+        $cita->direccion_municipio = request('direccion_municipio');        
         $cita->save();
         //return response()->json(['citas' => $cita]);
         return redirect('admin/historial/'. $cita->id_usuario);
@@ -228,12 +230,12 @@ class AdminController extends Controller
         $cita->costo_cita = request('costo_cita');
         $cita->fecha_cita = request('fecha');
         $cita->hora_cita = request('hora');
+        $cita->estatatus = "pendiente";
         $cita->telefono_contacto = request('telefono_contacto');
         $cita->direccion_calle = request('direccion_calle');
         $cita->direccion_colonia = request('direccion_colonia');
         $cita->direccion_localidad = request('direccion_localidad');
-        $cita->direccion_municipio = request('direccion_municipio');
-        $cita->direccion_estado = "México";
+        $cita->direccion_municipio = request('direccion_municipio');        
         $cita->update();
         //return response()->json(['citas' => $cita]);
         return redirect('admin/historial/'. $cita->id_usuario);

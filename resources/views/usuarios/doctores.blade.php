@@ -24,8 +24,12 @@
         });
     })
 </script>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <center>
+        <h2>Doctores</h2>
+    </center>
+  </div>
 <table class="table table-hover">
-    @foreach ($doctor as $doctor)
     <thead>
         <tr>
             <th scope="col">ID Usuario</th>
@@ -35,7 +39,8 @@
             <th scope="col">Acciones</th>
         </tr>
     </thead>
-    <tbody>        
+    <tbody>
+        @foreach ($doctor as $doctor)
         <tr id="{{$doctor->id_usuario}}">
                 <td>{{$doctor->id_usuario}}</td>
                 <td>{{$doctor->nombre}} {{$doctor->primer_apellido}}</td>

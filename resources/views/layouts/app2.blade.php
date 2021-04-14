@@ -145,7 +145,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('admin/historial')}}" class="nav-link">
+                <a href="{{url('admin/historial/'. session('session_id'))}}" class="nav-link">
                   <p>Historial de Consultas</p>
                 </a>
               </li>
@@ -167,22 +167,6 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Forms                
-              </p>
-            </a>            
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Tables                
-              </p>
-            </a>            
           </li>          
         </ul>
       </nav>

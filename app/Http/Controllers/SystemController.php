@@ -84,7 +84,7 @@ class SystemController extends Controller
     }
     public function emergencias(){
         $emergencias['emergencias'] = EmergenciasModel::all();
-        return view("emergencias", $emergencias);        
+        return view("emergencias", $emergencias);    
     }
     public function doctores(){        
         $perfil  = 3;

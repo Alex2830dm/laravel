@@ -6,13 +6,16 @@
   </center>
 </div>
     <div class="container">
+      <a href="{{url('admin/formulario_emer')}}">
+        <button type="button" class="btn btn-outline-info btn-sm">Registrar Nueva Institución</button>
+      </a><br>
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">ID Usuario</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Perfil</th>
+            <th scope="col">ID Institución</th>
+            <th scope="col">Nombre De La Institución</th>
+            <th scope="col">Telefono De La Institución</th>
+            <th scope="col">Zona</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>

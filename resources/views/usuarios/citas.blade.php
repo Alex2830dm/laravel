@@ -51,15 +51,11 @@
         </div>
         <div class="row">
             <div class="col-4">
-                Selecciona el tipo de cita
-                <select name="tipo_cita" id="tipo_cita" class="form-control">
-                    <option value=0> Selecciona un tipo de cita</option>
-                    <option value=1> Consultorio </option>
-                    <option value=2> Domicilio </option>
-                </select>
+                Tipo de Cita
+                <input type="text" name="tipo_cita" class="form-control" value="domicilio" readonly>
             </div>
             <div class="col-4">
-                Costo cita <input type="text" name="costo_cita" id="costo_cita" class="form-control">
+                Costo cita <input type="text" name="costo_cita" id="costo_cita" class="form-control" value="{{$datos->precio_consulta_dom}}" readonly>
             </div>
         </div>
         <div class="row">
@@ -89,10 +85,7 @@
         <div class="row">
             <div class="col-4">
                 Municipio: <input type="text" name="direccion_municipio" class="form-control">
-            </div>
-            <div class="col-4">
-                Estado: <input type="text" name="direccion_estado" class="form-control">
-            </div>        
+            </div>    
         </div><br><hr>
         <div class="row">
             <div class="col-4">

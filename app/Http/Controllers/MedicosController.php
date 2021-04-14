@@ -84,15 +84,14 @@ class MedicosController extends Controller
         $cita->apellido_paciente = request('apellidos_paciente');
         $cita->tipo_cita = request('tipo_cita');
         $cita->costo_cita = request('costo_cita');
+        $cita->estatus = "pendiente";
         $cita->fecha_cita = request('fecha');
         $cita->hora_cita = request('hora');
-        $cita->estatus = 1;
         $cita->telefono_contacto = request('telefono_contacto');
         $cita->direccion_calle = request('direccion_calle');
         $cita->direccion_colonia = request('direccion_colonia');
         $cita->direccion_localidad = request('direccion_localidad');
-        $cita->direccion_municipio = request('direccion_municipio');
-        $cita->direccion_estado = request('direccion_estado');
+        $cita->direccion_municipio = request('direccion_municipio');    
         $cita->save();
         //return response()->json(['citas' => $cita]);
         return redirect('medico/historial/'. $cita->id_usuario);
@@ -128,12 +127,12 @@ class MedicosController extends Controller
         $cita->costo_cita = request('costo_cita');
         $cita->fecha_cita = request('fecha');
         $cita->hora_cita = request('hora');
+        $cita->estatus = "pendiente";
         $cita->telefono_contacto = request('telefono_contacto');
         $cita->direccion_calle = request('direccion_calle');
         $cita->direccion_colonia = request('direccion_colonia');
         $cita->direccion_localidad = request('direccion_localidad');
-        $cita->direccion_municipio = request('direccion_municipio');
-        $cita->direccion_estado = "México";
+        $cita->direccion_municipio = request('direccion_municipio');        
         $cita->update();
         //return response()->json(['citas' => $cita]);
         return redirect('medico/historial/'. $cita->id_usuario);;
@@ -144,7 +143,8 @@ class MedicosController extends Controller
         $fecha = now()->toDateString('Y-m-d');
         if($tip_usu == 3){
             $datos    = CitasModel::where('id_medico', '=', $id_medico)
-                                    ->where('fecha_cita', $fecha)->get();
+                                    ->where('fecha_cita', $fecha)
+                                    ->where('estatus', '=', 'pendiente')->get();
             return view('medicos.agenda')->with(['datos' => $datos]);
             //return response()->json($datos);
         }
@@ -154,9 +154,12 @@ class MedicosController extends Controller
         return response()->json($fecha);
     }
     public function pacientes($id){
-        $tip_usu = session('session_tipo');        
+        $tip_usu = session('session_tipo');
+        $id_medico = session('session_id');
         if($tip_usu == 3){            
-            $datos = CitasModel::where('id_cita', '=', $id)->get();            
+            $datos = CitasModel::where('estatus', '=', 'atentida')
+                                ->where('id_medico', $id_medico)
+                                ->orderBy('id_usuario')->get();                                                                
             //return response()->json($datos);
             return view('medicos.pacientes')->with(['datos' => $datos]);
         }
@@ -164,12 +167,23 @@ class MedicosController extends Controller
             return redirect()->route("login");
         }          
     }
+    public function cita($id){
+        $tip_usu = session('session_tipo');        
+        if($tip_usu == 3){            
+            return view('medicos.cita', ['datos'=> CitasModel::findOrFail($id)]);            
+            //return response()->json($datos);            
+        }
+        else{
+            return redirect()->route("login");
+        } 
+    }
     public function actpac(Request $request, $id){
-        $cita = CitasModel::findOrFail($id);
-        $cita->estatatus = request('estatatus');
+        $cita = CitasModel::findOrFail($id);        
+        $cita->estatus = "atentida";
         $cita->observaciones = request('observaciones');
         $cita->medicamentos = request('medicamentos');
         $cita->update();
-        return response()->json($cita);
+        //return response()->json($cita);
+        return redirect('medico/agenda');
     }
 }

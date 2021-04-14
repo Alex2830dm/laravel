@@ -11,20 +11,26 @@ if(count($usus) == 0 ){?>
         <h4>Información del Usuario</h4>
         <table>
             <tr>
-                <td rowspan="6"><img src="{{asset('img/'.$usu->foto)}}" alt="Foto del usuario" width="250" height="auto"></td>
-                <td>ID: {{$usu->id_usuario}}</td>            
+                <td rowspan="6"><img src="{{asset('img/'.$usu->foto)}}" alt="Foto del usuario" width="100" height="auto"></td>                           
             </tr>
             <tr>
                 <td>Nombre Completo: {{$usu->apellido_paterno}} {{$usu->apellido_materno}} {{$usu->nombre}}</td>
-            </tr>
-            <tr>
                 <td>Telefono: {{$usu->telefono}} </td>
+                <td>Cedula(s): {{$usu->cedulas}}</td>
+            </tr>            
+            <tr>
+                <td>Correo: {{$usu->email}}</td>            
+                <td>Perfil: {{$usu->perfil == 1? "Administrador":($usu->perfil == 2? "Usuario" : "Medico")}}</td>
+                <td>Especialidades: {{$usu->especialidades}}</td>
             </tr>
             <tr>
-                <td>Correo: {{$usu->email}}</td>
+                <td colspan="3">
+                    Dirección de Consultorio: {{$usu->consultorio_calle}}, {{$usu->consultorio_colonia}}, {{$usu->consultorio_localidad}}, {{$usu->consultorio_municipio}}
+                </td>
             </tr>
             <tr>
-                <td> Perfil: {{$usu->perfil}} </td>
+                <td>Precio Consulta: $ {{$usu->precio_consulta}} MXN</td>
+                <td>Precio Consulta a Domicilio: $ {{$usu->precio_consulta_dom}} MXN</td>
             </tr>
             <tr>
                 <td>                
@@ -38,6 +44,8 @@ if(count($usus) == 0 ){?>
                         Llamar
                     </button>
                 </a>
+                </td>
+                <td>
                 <form action="{{url('admin/usuariosdelete', $usu->id_usuario)}}" method="POST">
                     <a href="{{url('admin/usuariosedit/'.$usu->id_usuario)}}">
                       <button type="button" class="btn btn-outline-primary btn-sm">

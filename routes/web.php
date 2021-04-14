@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () { return view('welcome'); })->name('/');
 Route::get('registro', function() { return view('registro'); })->name('register');
 Route::name('registrarusu')->post('registrarusu/', 'SystemController@storeusu');
 Route::name('login')->get('login', function() { return view('login'); });
@@ -19,6 +19,9 @@ Route::name('validar')->post('validar/', 'LoginController@validar');
 Route::name('logout')->get('logout', 'LoginController@logout');
 Route::name('doctores')->get('doctores/', 'SystemController@doctores');
 Route::name('emergencias')->get('emergencias/', 'SystemController@emergencias');
+Route::name('quienes_somos')->get('quienes_somos/', function(){return view('quienes_somos');});
+Route::name('informacion')->get('informacion', function(){ return view('unete');});
+Route::name('primeros_auxilios')->get('primeros_auxilios', function(){ return view('primeros_auxilios');});
 //Route::name('usuarios')->get('usuarios/', 'AdminController@list');
 
 //--------------------Emergencias-------------------
@@ -28,7 +31,7 @@ Route::name('emergencias')->get('emergencias/', 'SystemController@emergencias');
 Route::group(['prefix' => 'emergenciass'], function(){    
     Route::patch('usuariosupdate/{id}', 'AdminController@updateusu')->name('usuariosupdate');
     Route::delete('usuariosdelete/{id}', 'AdminController@destroyusu');
-    Route::delete('emerdelele/{id}', 'AdminController@destroyemer');
+    Route::delete('emerdelele/{id}', 'AdminController@destroyemer');    
 });
 
 //---------------------------- Usuario ----------------
@@ -92,5 +95,7 @@ Route::prefix('medico')->group(function () {
     Route::patch('updatec/{id}', 'MedicosController@updcita');
     
     Route::get('agenda', 'MedicosController@agenda');
-    Route::get('cita_paciente/{id}', 'MedicosController@pacientes');
+    Route::get('cita/{id}', 'MedicosController@cita');
+    Route::patch('atendida/{id}', 'MedicosController@actpac');
+    Route::get('pacientes/{id}', 'MedicosController@pacientes');
 });

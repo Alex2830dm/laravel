@@ -17,11 +17,11 @@ class CitasModel extends Model
         'costo_cita',
         'fecha_cita',
         'hora_cita',
+        'estatatus',
         'telefono_contacto',
         'direccion_calle',
         'direccion_colonia',
         'direccion_localidad',
-        'direccion_municipio',
-        'direccion_estado'
+        'direccion_municipio',        
     ];
 }

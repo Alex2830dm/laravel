@@ -1,29 +1,33 @@
 @extends('layouts.app2')
 @section('scripts')
-
-@endsection
-@section('content')
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#tipo_cita').click(function(){        
+        var precio = $('#precio').val();        
+        var precio_dom = $('#precio_dom').val();
+        var costo = $("#costo_cita");
+        var dcal = $("#dcal").val(), dcol = $("#dcol").val(), dloc = $("#dloc").val(), dmun = $("#dmun").val();
+        var d1 = $("#d1"), d2 = $("#d2"), d3 = $("#d3"), d4 = $("#d4");
+        $('#tipo_cita').click(function(){
             var tipo = $('#tipo_cita').val();
-            var precio = $('#precio').val();
-            var precio_dom = $('#precio_dom').val();
-            if(tipo == "consultoria"){
-                $("#costo_cita").text(precio);
-            }else if(tipo == "domicilio"){
-                $("#costo_cita").text(precio_dom);
-            }
+            costo.val(precio);
+            d1.val(dcal), d2.val(dcol), d3.val(dloc), d4.val(dmun);
+        });
+        $('#tipo_cita2').click(function(){
+            d1.val(""), d2.val(""), d3.val(""), d4.val("");
+            var tipo = $('#tipo_cita').val();
+            costo.val(precio_dom);
         })
     });
 </script>
+@endsection
+@section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <center>
     <h2>Agendar Una Cita Con: {{$datos->nombre}}</h2>
     </center>
 </div>
 <div class="container">
-    <form action="{{url('admin/registrocita')}}" method="post">
+    <form action="{{url('admin/registrocita')}}" method="post">    
         <div class="row">
             <div class="col-4">
                 <input type="text" name="id_usuario" value="{{session('session_id')}}" hidden>
@@ -34,17 +38,21 @@
         </div>
         <div class="row">
             <div class="col-4">
-                Nombre del medico: <input type="text" name="nombre" value="{{$datos->nombre}}" class="form-control">
+                Nombre del medico: <input type="text" name="nombre" value="{{$datos->nombre}}" class="form-control" readonly>
             </div>
             <div class="col-4">
-                Apellidos del medico: <input type="text" name="apellidos" value="{{$datos->apellido_paterno}} {{$datos->apellido_materno}}" class="form-control">
+                Apellidos del medico: <input type="text" name="apellidos" value="{{$datos->apellido_paterno}} {{$datos->apellido_materno}}" class="form-control" readonly>
             </div>
             <div class="col-2">
                 <input type="text" name="precio" id="precio" value="{{$datos->precio_consulta}}" class="form-control" hidden readonly>
             </div>
             <div class="col-2">
-                <input type="text" name="precio_dom" id="precio_dom" value="{{$datos->precio_consulta_dom}}" class="form-control" hidden readonly>
-            </div>
+                <input type="text" id="precio_dom" value="{{$datos->precio_consulta_dom}}" class="form-control" hidden readonly>
+                <input type="text" id="dcal" value="{{$datos->consultorio_calle}}" class="form-control">
+                <input type="text" id="dcol" value="{{$datos->consultorio_colonia}}" class="form-control" hidden readonly>
+                <input type="text" id="dloc" value="{{$datos->consultorio_localidad}}" class="form-control" hidden readonly>
+                <input type="text" id="dmun" value="{{$datos->consultorio_municipio}}" class="form-control" hidden readonly>
+            </div>            
         </div>
         <div class="row">
             <div class="col-4">
@@ -56,15 +64,12 @@
         </div>
         <div class="row">
             <div class="col-4">
-                Selecciona el tipo de cita
-                <select name="tipo_cita" id="tipo_cita" class="form-control">
-                    <option value=0> Selecciona un tipo de cita</option>
-                    <option value=1> Consultorio </option>
-                    <option value=2> Domicilio </option>
-                </select>
+                Selecciona el tipo de cita <br>
+                <input type="radio" id="tipo_cita" name="tipo_cita" value="consultorio"> En consultorio    
+                <input type="radio" id="tipo_cita2" name="tipo_cita" value="domicilio"> A domicilio
             </div>
             <div class="col-4">
-                Costo cita <input type="text" name="costo_cita" id="costo_cita" class="form-control">
+                Costo cita <input type="text" name="costo_cita" id="costo_cita" class="form-control" readonly>
             </div>
         </div>
         <div class="row">
@@ -80,24 +85,21 @@
         </div>
         <div class="row">
             <div class="col-8">
-                Calle: <input type="text" name="direccion_calle" class="form-control">
+                Calle: <input type="text" name="direccion_calle" class="form-control" id="d1">
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                Colinia: <input type="text" name="direccion_colonia" class="form-control">
+                Colinia: <input type="text" name="direccion_colonia" class="form-control" id="d2">
             </div>
             <div class="col-4">
-                Localidad: <input type="text" name="direccion_localidad" class="form-control">
+                Localidad: <input type="text" name="direccion_localidad" class="form-control" id="d3">
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                Municipio: <input type="text" name="direccion_municipio" class="form-control">
-            </div>
-            <div class="col-4">
-                Estado: <input type="text" name="direccion_estado" class="form-control">
-            </div>        
+                Municipio: <input type="text" name="direccion_municipio" class="form-control" id="d4">
+            </div>            
         </div><br><hr>
         <div class="row">
             <div class="col-4">

@@ -62,30 +62,30 @@
       <ul class="navbar-nav mr-auto">
         <h6>
           <li class="nav-item active">
-            <a class="nav-link text-white" href="{{url('/')}}">Inicio<span class="sr-only">(current)</span></a>
+            <a class="nav-link text-white" href="{{route('/')}}">Inicio<span class="sr-only">(current)</span></a>
           </li>
         </h6>
         <h6>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('quienes-somos')}}" role="button" aria-haspopup="true" aria-expanded="false">¿Quienes Somos?</a>
+            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{route('quienes_somos')}}" role="button" aria-haspopup="true" aria-expanded="false">¿Quienes Somos?</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{url('usuarios/quienes-somos')}}">¿Quienes Somos?</a>
-              <a class="dropdown-item" href="{{url('usuarios/unete-hs')}}">Unete a Healthceare System</a>              
+              <a class="dropdown-item" href="{{route('quienes_somos')}}">¿Quienes Somos?</a>
+              <a class="dropdown-item" href="{{route('informacion')}}">Unete a Healthceare System</a>              
             </div>
           </li>
         </h6>
         <h6>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('primeros-auxilios')}}" role="button" aria-haspopup="true" aria-expanded="false">Servicios</a>
+            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{route('primeros_auxilios')}}" role="button" aria-haspopup="true" aria-expanded="false">Servicios</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{url('usuarios/primeros-auxilios')}}">Primeros Auxilios</a>
-              <a class="dropdown-item" href="{{url('usuarios/emergencias')}}">Emergencias</a>                        
+              <a class="dropdown-item" href="{{route('primeros_auxilios')}}">Primeros Auxilios</a>
+              <a class="dropdown-item" href="{{route('emergencias')}}">Emergencias</a>                        
             </div>
           </li>
         </h6>  
         <h6>
           <li class="nav-item active">
-          <a class="nav-link text-white" href="{{url('usuarios/doctores')}}">Doctores<span class="sr-only">(current)</span></a>
+          <a class="nav-link text-white" href="{{route('doctores')}}">Doctores<span class="sr-only">(current)</span></a>
           </li>
         </h6>
         </h6>
@@ -110,7 +110,7 @@
           <div class="carousel-caption text-left">
             <h1>Agenda Una Cita</h1>
             <p>Agenda una cita con nuestros doctores disponibles, elige el que sea de tu confianza.</p>
-            <p><a class="btn btn-lg btn-primary" href="{{ url('usuarios/doctores') }}" role="button">Ir A La Agenda</a></p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Ir A La Agenda</a></p>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@
           <div class="carousel-caption">
             <h1>Ten Una Cita Urgente</h1>
             <p>Si necesitas a alguna atención medica al momento, llama a algún doctor que se encuentre cerca de ti.</p>
-            <p><a class="btn btn-lg btn-primary" href="{{ url('usuarios/doctores') }}" role="button">Ir Al Directorio</a></p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Ir Al Directorio</a></p>
           </div>
         </div>
       </div>
@@ -130,7 +130,7 @@
           <div class="carousel-caption text-right">
             <h1>Conoce A Nuestro Sector Salud</h1>
             <p>Puedes visualizar los hospitales con los que estamos relacionados</p>
-            <p><a class="btn btn-lg btn-primary" href="{{ url('usuarios/emergencias') }}" role="button">Ve A Conocer</a></p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Ve A Conocer</a></p>
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@
           <h2>Emergencia</h2>
           <p>Si necesitas atencion inmediata por un accidente con gravedad<br><br></p>
         </a>
-        <p><a class="btn btn-secondary" href="{{ url('usuarios/emergencias') }}" role="button">Pedir ayuda &raquo;</a></p>
+        <p><a class="btn btn-secondary" href="#" role="button">Pedir ayuda &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <a href="#"  class="text-secondary">
@@ -168,7 +168,7 @@
           <h2>Primeros Auxilios</h2>
           <p>Conoce informacion sobre los primeros auxilios y como los puedes tratar<br><br></p>
         </a>
-        <p><a class="btn btn-secondary" href="{{ url('usuarios/primeros-auxilios') }}" role="button">Informate&raquo;</a></p>
+        <p><a class="btn btn-secondary" href="#" role="button">Informate&raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <a href="#"  class="text-secondary">
@@ -177,7 +177,7 @@
           <p>Podras ver información sobre los doctores con los que contamos y así podras tener una cita con ellos</p>
           OIRyxkQ7QvG*W@!aBx%n
         </a>
-        <p><a class="btn btn-secondary" href="{{ url('usuarios/doctores') }}" role="button">Miralos Aquí&raquo;</a></p>
+        <p><a class="btn btn-secondary" href="#" role="button">Miralos Aquí&raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 

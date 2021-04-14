@@ -2,16 +2,18 @@
 @section('scripts')
 <script type="text/javascript">
   $(document).ready(function(){
+    $("span.sname").css({
+      "visibility": "hidden"
+    });
     $('#nombre').keyup(function(){
       var txtname = $('#nombre').val();
       var formato = /^[A-Za-z\_\-.\s\xF1\xD1]+$/;
       if(formato.test(txtname)){
-        $("span.sname").css({
-          "visibility": "hidden"
-        });
+        $("#nombre").css({"border": "1px solid #0F0"})
       }else{
+        $("#nombre").css({"border": "1px solid #F00"})
         $("span.sname").css({
-          "visibility": "visible"                            
+          "visibility": "visible"
         });
       }
     });
@@ -36,14 +38,28 @@
     });
     //----------------------------
     $("#email").blur(function(){
-      var txtmail = $("e#mail").val();
+      var txtmail = $("#email").val();
       var valmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;                    
       if(valmail.test(txtmail)){
-        $("#smail").text("valido");
+        $("#email").css({"border": "1px solid #0FC714"});
       }else{
         $("#smail").text("incorrecto");
       }
     });
+    //----------------------------
+    $("span.stel").css({ "visibility": "hidden" });
+    $("#telefono").keyup(function(){      
+      var tel = $("#telefono").val();      
+      if(tel.length < 10){
+        $("#telefono").css({"color": "#FF0707"});
+        $("#stel").text("Tiene que contener 10 digitos");
+      }else if(tel.length == 10){
+        $("#telefono").css({"color": "#0FC714", "border": "1px solid #0FC714"});
+      }else{
+        $("#telefono").css({"color": "#FF0707"});
+        $("span.stel").text("Solo debe contener 10 digitos");
+      }
+    })
     //----------------------------
     $('#pass').keyup(function() {
       var txtpass1 = $("#pass").val();
@@ -59,25 +75,25 @@
         if(valminus.test(txtpass1)){
           if(valnum.test(txtpass1)){
             if(valcarac.test(txtpass1)){
-              $("#pass").css({"border": "1px solid #0F0"}).fadeIn(2000);
+              $("#spass").text("Contraseña Segura");
             }else{
-              $("#spass1").text("La Contraseña Debe Contener Un Caracter Especial");
+              $("#spass").text("La Contraseña Debe Contener Un Caracter Especial");
             }                                
           }else{
-            $("#spass1").text("Contraseña Debe Contener un Numero");
+            $("#spass").text("Contraseña Debe Contener un Numero");
           }
         }else{
-          $("#spass1").text("Contraseña debe contener minusculas");                            
+          $("#spass").text("Contraseña debe contener minusculas");                            
         }
       }else{
-        $("#spass1").text("Contraseña debe contener mayusculas");
+        $("#spass").text("Contraseña debe contener mayusculas");
       }     
       if (txtpass1.length >= 8) {
-        $("#spass1").css({"color": "#0FC714"});                        
+        $("#pass").css({"color": "#0FC714"});                        
       }else if (txtpass1.length >= 6){
-        $("#spass1").css({"color": "#E9E315"});                        
+        $("#pass").css({"color": "#E9E315"});                        
       }else{
-        $("#spass1").css({"color": "#FF0707"});                        
+        $("#pass").css({"color": "#FF0707"});                        
       }
     });
   })                
@@ -102,22 +118,24 @@
                 <div class="col-8">
                   <label for="name">Nombre: </label>  
                   <input type="text" name="nombre" id="nombre" class="form-control">
+                  <td><span id="sname" class="sname">Error: en el nombre !!!</span></td>
                 </div>
               </div>
               <div class="form-group row justify-content-center">
                 <div class="col-4">
                   <label for="app" >Primer Apellido: </label>
-                  <input type="text" name="app" id="app" class="form-control">
+                  <input type="text" name="app" id="app" class="form-control">                  
                 </div>                  
                 <div class="col-4">
                   <label for="apm">Segundo Apellido: </label>
-                  <input type="text" name="apm" id="apm" class="form-control">
+                  <input type="text" name="apm" id="apm" class="form-control">                  
                 </div>
               </div>
               <div class="form-group row justify-content-center">
                 <div class="col-4">
                   <label for="telefono">Telefono: </label>
                   <input type="text" name="telefono" id="telefono" class="form-control">
+                  <td><span id="stel" class="stel"></span></td>
                 </div>
                 <div class="col-4">
                   <label for="Zona">Zona: </label>
@@ -128,10 +146,12 @@
                 <div class="col-4">
                   <label for="email">E-mail: </label>
                   <input type="mail" name="email" id="email" class="form-control">
+                  <td><span id="smail" class="smail"></span></td>
                 </div>
                 <div class="col-4">
                   <label for="pass">Password: </label>
                   <input type="password" name="pass" id="pass" class="form-control">
+                  <td><span id="spass" class="spass"></span></td>
                 </div>
               </div>
               <input type="numbre" name="perfil" id="perfil" class="form-control" value="1" hidden readonly>

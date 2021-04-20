@@ -12,7 +12,11 @@
         "fideloper/proxy": "^4.4",
         "laravel/framework": "^6.20",
         "laravel/tinker": "^2.5",
-        "paypal/rest-api-sdk-php": "^1.14"
+        "maatwebsite/excel": "^3.1",
+        "paypal/paypal-checkout-sdk": "1.0.1",
+        "paypal/rest-api-sdk-php": "^1.14",
+        "phpoffice/phpspreadsheet": "^1.17",
+        "phpoffice/phpword": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^1.16.4",

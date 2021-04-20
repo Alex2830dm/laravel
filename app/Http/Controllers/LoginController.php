@@ -27,8 +27,8 @@ class LoginController extends Controller
             //---------- Crea las variables de Session -------------------
             $request->session()->put('session_id', $consulta[0]->id_usuario);
             $request->session()->put('session_name', $consulta[0]->nombre);
-            $request->session()->put('session_app', $consulta[0]->apellido_paterno);
-            $request->session()->put('session_apm', $consulta[0]->apellido_materno);
+            $request->session()->put('session_app', $consulta[0]->app);
+            $request->session()->put('session_apm', $consulta[0]->apm);
             $request->session()->put('session_telefono', $consulta[0]->telefono);
             $request->session()->put('session_foto', $consulta[0]->foto);
             $request->session()->put('session_tipo', $consulta[0]->perfil);

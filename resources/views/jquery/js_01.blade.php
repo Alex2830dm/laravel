@@ -25,12 +25,12 @@ if(count($usus) == 0 ){?>
             </tr>
             <tr>
                 <td colspan="3">
-                    Dirección de Consultorio: {{$usu->consultorio_calle}}, {{$usu->consultorio_colonia}}, {{$usu->consultorio_localidad}}, {{$usu->consultorio_municipio}}
+                    Dirección de Consultorio: {{$usu->ccalle}}, {{$usu->ccolonia}}, {{$usu->clocalidad}}, {{$usu->cmunicipio}}
                 </td>
             </tr>
             <tr>
-                <td>Precio Consulta: $ {{$usu->precio_consulta}} MXN</td>
-                <td>Precio Consulta a Domicilio: $ {{$usu->precio_consulta_dom}} MXN</td>
+                <td>Precio Consulta: $ {{$usu->pconsulta}} MXN</td>
+                <td>Precio Consulta a Domicilio: $ {{$usu->pconsulta_dom}} MXN</td>
             </tr>
             <tr>
                 <td>                

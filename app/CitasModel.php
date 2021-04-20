@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class CitasModel extends Model
 {
-    protected $table = 'tb_citas';
+    protected $table = 'citas';
     protected $primaryKey = 'id_cita';
     protected $fillable = [
+        'id_cita',
         'id_medico',
         'id_usuario',
         'nombre_paciente',

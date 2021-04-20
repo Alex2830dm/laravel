@@ -1,5 +1,10 @@
 @extends('layouts.app3')
 @section('content')
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <center>
+        <h2>Perfil: {{$perfil->nombre}} {{$perfil->app}} {{$perfil->apm}}</h2>
+    </center>
+</div> 
 <div class="container-sm">   
     <div class="row justify-content-center">        
         <div class="col-4">
@@ -10,9 +15,9 @@
             <label class="text-center">Nombre:</label>
             <input class="form-control" type="text" name="name" value="{{ $perfil->nombre }}" readonly>
             <label class="text-center">Apellido Paterno:</label>
-            <input class="form-control" type="text" name="app" value="{{ $perfil->apellido_paterno }}" readonly>
+            <input class="form-control" type="text" name="app" value="{{ $perfil->app }}" readonly>
             <label class="text-center">Apellido Materno:</label>
-            <input class="form-control" type="text" name="apm" value="{{ $perfil->apellido_materno }}" readonly>
+            <input class="form-control" type="text" name="apm" value="{{ $perfil->apm }}" readonly>
             <label class="text-center">Telefono:</label>
             <input class="form-control" type="text" name="telefono" value="{{ $perfil->telefono }}" readonly>
         </div>
@@ -24,7 +29,7 @@
         </div>
         <div class="col-4">
             <label class="text-center">Zona:</label>
-            <input class="form-control" type="text" name="zona" value="Lerma" readonly>            
+            <input class="form-control" type="text" name="zona" value="{{$perfil->municipio}}" readonly>            
         </div>
     </div><br>    
     <div class="row justify-content-center">

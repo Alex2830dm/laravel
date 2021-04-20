@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmergenciasModel extends Model
 {
-    protected $table = 'tb_emergencias';
+    protected $table = 'emergencias';
     protected $primaryKey = 'id_institucion';
     protected $fillable = [
         'nombre_institucion',

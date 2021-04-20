@@ -44,14 +44,14 @@
                 Apellidos del medico: <input type="text" name="apellidos" value="{{$datos->apellido_paterno}} {{$datos->apellido_materno}}" class="form-control" readonly>
             </div>
             <div class="col-2">
-                <input type="text" name="precio" id="precio" value="{{$datos->precio_consulta}}" class="form-control" hidden readonly>
+                <input type="text" name="precio" id="precio" value="{{$datos->pconsulta}}" class="form-control" hidden readonly>
             </div>
             <div class="col-2">
-                <input type="text" id="precio_dom" value="{{$datos->precio_consulta_dom}}" class="form-control" hidden readonly>
-                <input type="text" id="dcal" value="{{$datos->consultorio_calle}}" class="form-control">
-                <input type="text" id="dcol" value="{{$datos->consultorio_colonia}}" class="form-control" hidden readonly>
-                <input type="text" id="dloc" value="{{$datos->consultorio_localidad}}" class="form-control" hidden readonly>
-                <input type="text" id="dmun" value="{{$datos->consultorio_municipio}}" class="form-control" hidden readonly>
+                <input type="text" id="precio_dom" value="{{$datos->pconsulta_dom}}" class="form-control" hidden readonly>
+                <input type="text" id="dcal" value="{{$datos->ccalle}}" class="form-control" readonly hidden>
+                <input type="text" id="dcol" value="{{$datos->ccolonia}}" class="form-control" hidden readonly>
+                <input type="text" id="dloc" value="{{$datos->clocalidad}}" class="form-control" hidden readonly>
+                <input type="text" id="dmun" value="{{$datos->cmunicipio}}" class="form-control" hidden readonly>
             </div>            
         </div>
         <div class="row">

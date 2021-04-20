@@ -7,6 +7,7 @@ use Auth;
 use App\Usuarios;
 use App\EmergenciasModel;
 use App\DoctoresModel;
+use App\Http\Requests\UsuariosRequest;
 
 class SystemController extends Controller
 {
@@ -62,17 +63,21 @@ class SystemController extends Controller
             return redirect()->route("login");
         }
     }
-    public function storeusu(Request $request)
+    public function registro(){
+        return view('registro');
+    }
+    public function storeusu(UsuariosRequest $request)
     {
         $usu = new Usuarios;
         $usu->nombre = request('nombre');
-        $usu->apellido_paterno = request('app');
-        $usu->apellido_materno = request('apm');
+        $usu->app = request('app');
+        $usu->apm = request('apm');
         $usu->telefono = request('telefono');
-        $usu->zona = request('zona');
+        $usu->municipio = request('municipio');
         $usu->email = request('email');
         $usu->password = request('pass');
-        $usu->perfil = 2;        
+        $usu->sexo = request('sexo');
+        $usu->perfil = true;
         if($request->hasFile('foto')){
             $file = $request->foto;
             $file->move(public_path(). '/img', $file->getClientOriginalName());

@@ -8,9 +8,14 @@ use App\Usuarios;
 use App\EmergenciasModel;
 use App\DoctoresModel;
 use App\CitasModel;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CitasExport;
 
 class MedicosController extends Controller
 {
+    public function exportExcel(){
+        return Excel::download(new CitasExport, 'citas-list.xlsx');
+    }
     public function perfil(){        
         $tip_usu = session('session_tipo');        
         if($tip_usu == 3){
@@ -47,9 +52,10 @@ class MedicosController extends Controller
     public function updmed(Request $request, $id){
         $usu = Usuarios::findOrFail($id);
         $usu->nombre = request('name');
-        $usu->apellido_paterno = request('app');
-        $usu->apellido_materno = request('apm');
-        $usu->telefono = request('telefono');        
+        $usu->app = request('app');
+        $usu->apm = request('apm');
+        $usu->telefono = request('telefono');
+        $usu->municipio = request('zona');     
         $usu->update();
         //return response()->json(['usuarios' => $usu]);
         return redirect('medico/perfil');
@@ -88,10 +94,10 @@ class MedicosController extends Controller
         $cita->fecha_cita = request('fecha');
         $cita->hora_cita = request('hora');
         $cita->telefono_contacto = request('telefono_contacto');
-        $cita->direccion_calle = request('direccion_calle');
-        $cita->direccion_colonia = request('direccion_colonia');
-        $cita->direccion_localidad = request('direccion_localidad');
-        $cita->direccion_municipio = request('direccion_municipio');    
+        $cita->dcalle = request('direccion_calle');
+        $cita->dcolonia = request('direccion_colonia');
+        $cita->dlocalidad = request('direccion_localidad');
+        $cita->dmunicipio = request('direccion_municipio');;    
         $cita->save();
         //return response()->json(['citas' => $cita]);
         return redirect('medico/historial/'. $cita->id_usuario);
@@ -99,19 +105,24 @@ class MedicosController extends Controller
     public function historial($id){
         $tip_usu = session('session_tipo');        
         if($tip_usu == 3){
-            $datos    = CitasModel::where('id_usuario', $id)->orderBy('tipo_cita')->get();
+            $datos    = CitasModel::select('citas.id_cita', 'citas.nombre_paciente', 'citas.fecha_cita', 'citas.apellido_paciente',
+                            'citas.hora_cita', 'citas.estatus', 'citas.tipo_cita','usuarios.nombre', 'usuarios.app')
+                        ->join('usuarios', 'citas.id_medico', '=', 'usuarios.id_usuario')->where('citas.id_usuario', '=', $id)->get();
             return view('medicos.historial')->with(['datos' => $datos]);
             //return response()->json(['datos' => $datos]);        
         }
         else{
             return redirect()->route("login");
-        }        
+        }         
     }
     public function modificarc($id){
         $tip_usu = session('session_tipo');        
         if($tip_usu == 3){
-            return view('medicos.modificarc', ['datos'=> CitasModel::findOrFail($id)]);
-            //return response()->json(['datos'=> CitasModel::findOrFail($id)]);            
+            $datos = CitasModel::select('citas.id_cita','citas.nombre_paciente', 'citas.fecha_cita', 'citas.apellido_paciente', 'citas.costo_cita',
+                'citas.hora_cita', 'citas.telefono_contacto','citas.dcalle', 'citas.dcolonia', 'citas.dlocalidad', 'citas.dmunicipio',
+                'usuarios.nombre', 'usuarios.app', 'usuarios.pconsulta', 'usuarios.pconsulta_dom', 'usuarios.ccalle', 'usuarios.ccolonia', 'usuarios.clocalidad', 'usuarios.cmunicipio')
+                ->join('usuarios', 'citas.id_medico', '=', 'usuarios.id_usuario')->where('citas.id_cita', '=', $id)->get();
+            return view('medicos.modificarc')->with(['datos' => $datos]);
         }
         else{
             return redirect()->route("login");
@@ -137,8 +148,29 @@ class MedicosController extends Controller
         //return response()->json(['citas' => $cita]);
         return redirect('medico/historial/'. $cita->id_usuario);;
     }
+    public function detallesc($id){
+        $tip_usu = session('session_tipo');
+        if($tip_usu == 3){
+            return view('medicos.detallesc', ['datos'=> CitasModel::findOrFail($id)]);
+            //return response()->json(['datos'=> CitasModel::findOrFail($id)]);
+        }
+        else{
+            return redirect()->route("login");
+        }
+    }
+    public function cancelar(Request $request, $id){
+        $tip_usu = session('session_tipo');
+        if($tip_usu == 3){
+            $cita = CitasModel::findOrFail($id);
+            $cita->estatus = 'cancelada';
+            $cita->update();
+            return redirect('medico/historial/'.$tip_usu);
+        }else{
+            return redirect()->route("login");
+        }
+    }
     public function agenda(){
-        $tip_usu = session('session_tipo');    
+        $tip_usu = session('session_tipo');
         $id_medico = session('session_id');
         $fecha = now()->toDateString('Y-m-d');
         if($tip_usu == 3){
@@ -151,7 +183,7 @@ class MedicosController extends Controller
         else{
             return redirect()->route("login");
         }
-        return response()->json($fecha);
+        //return response()->json($fecha);
     }
     public function pacientes($id){
         $tip_usu = session('session_tipo');

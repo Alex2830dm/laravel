@@ -38,20 +38,20 @@
         </div>
         <div class="row">
             <div class="col-8">
-                Calle: <input type="text" name="direccion_calle" value="{{$datos->direccion_calle}}" class="form-control" readonly>
+                Calle: <input type="text" name="direccion_calle" value="{{$datos->dcalle}}" class="form-control" readonly>
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                Colinia: <input type="text" name="direccion_colonia" class="form-control" value="{{$datos->direccion_colonia}}" readonly>
+                Colinia: <input type="text" name="direccion_colonia" class="form-control" value="{{$datos->dcolonia}}" readonly>
             </div>
             <div class="col-4">
-                Localidad: <input type="text" name="direccion_localidad" class="form-control" value="{{$datos->direccion_localidad}}" readonly>
+                Localidad: <input type="text" name="direccion_localidad" class="form-control" value="{{$datos->dlocalidad}}" readonly>
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                Municipio: <input type="text" name="direccion_municipio" class="form-control" value="{{$datos->direccion_municipio}}" readonly>
+                Municipio: <input type="text" name="direccion_municipio" class="form-control" value="{{$datos->dmunicipio}}" readonly>
             </div>            
         </div><br><hr>
         <div class="row">

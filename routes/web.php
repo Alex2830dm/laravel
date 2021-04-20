@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () { return view('welcome'); })->name('/');
-Route::get('registro', function() { return view('registro'); })->name('register');
+Route::get('registro', 'SystemController@registro')->name('register');
 Route::name('registrarusu')->post('registrarusu/', 'SystemController@storeusu');
 Route::name('login')->get('login', function() { return view('login'); });
 Route::name('validar')->post('validar/', 'LoginController@validar');
@@ -24,9 +24,8 @@ Route::name('informacion')->get('informacion', function(){ return view('unete');
 Route::name('primeros_auxilios')->get('primeros_auxilios', function(){ return view('primeros_auxilios');});
 //Route::name('usuarios')->get('usuarios/', 'AdminController@list');
 
-//--------------------Emergencias-------------------
-
-
+Route::get('/paypal/pay', 'PaymentController@payWithPaypal');
+Route::get('/paypal/status', 'PaymentController@payPalStatus');
 
 Route::group(['prefix' => 'emergenciass'], function(){    
     Route::patch('usuariosupdate/{id}', 'AdminController@updateusu')->name('usuariosupdate');
@@ -44,20 +43,24 @@ Route::prefix('usuario')->group(function () {
     Route::name('js02')->get('js02/', 'JqueryController@js02');
     Route::name('citas')->get('citas/{id}', 'UsuariosController@datosd');
     Route::name('registrocita')->post('registrocita', 'UsuariosController@registrocita');
-    Route::name('historial')->get('historial/{id}', 'UsuariosController@historial');
+    Route::name('historial')->get('historial', 'UsuariosController@historial');    
     Route::get('modificar_cita/{id}', 'UsuariosController@modificarc');
+    Route::get('detalles/{id}', 'UsuariosController@detallesc');
     Route::patch('updatec/{id}', 'UsuariosController@updcita');
+    Route::patch('cancelar/{id}', 'UsuariosController@cancelar');
 
     Route::get('emergencias/', 'UsuariosController@emer');        
 });
 Route::prefix('admin')->group(function () {
     Route::get('perfil', 'AdminController@perfil')->name('perfil');
     Route::get('modificar/{id}', 'AdminController@editusu');
-    Route::patch('usuarioupd/{id}', 'AdminController@updusu');
+    Route::patch('update/{id}', 'AdminController@updusu');
     Route::name('usuarios')->get('usuarios/', 'AdminController@usuarios');
     Route::get('usuariosedit/{id}', 'AdminController@editu');    
     Route::patch('usuariosupdate/{id}', 'AdminController@updateusu');
     Route::delete('usuariosdelete/{id}', 'AdminController@destroyusu');
+    Route::get('admin/user-list', 'AdminController@exportExcel')->name('users.excel');
+    Route::post('impor-list-excel', 'AdminController@importExcel')->name('users.import.excel');
 
     Route::get('doctores/', 'AdminController@doctores');
     Route::name('js01')->get('js01/', 'JqueryController@js01');
@@ -65,7 +68,9 @@ Route::prefix('admin')->group(function () {
     Route::get('historial/{id}', 'AdminController@historial');
     Route::post('registrocita', 'AdminController@registrocita');
     Route::get('modificar_cita/{id}', 'AdminController@modificarc');
+    Route::get('detalles/{id}', 'AdminController@detallesc');
     Route::patch('updatec/{id}', 'AdminController@updcita');
+    Route::patch('cancelar/{id}', 'AdminController@cancelar');
     
     Route::get('registro', 'AdminController@registro');
     Route::post('registrar', 'AdminController@storeusu');
@@ -93,9 +98,12 @@ Route::prefix('medico')->group(function () {
     Route::get('historial/{id}', 'MedicosController@historial');
     Route::get('modificar_cita/{id}', 'MedicosController@modificarc');
     Route::patch('updatec/{id}', 'MedicosController@updcita');
+    Route::get('detalles/{id}', 'MedicosController@detallesc');
+    Route::patch('cancelar/{id}', 'MedicosController@cancelar');
     
     Route::get('agenda', 'MedicosController@agenda');
     Route::get('cita/{id}', 'MedicosController@cita');
     Route::patch('atendida/{id}', 'MedicosController@actpac');
     Route::get('pacientes/{id}', 'MedicosController@pacientes');
+    Route::get('citas-list', 'MedicosController@exportExcel')->name('citas.excel');
 });

@@ -31,21 +31,23 @@
   </div>
 <table class="table table-hover">
     <thead>
-        <tr>
-            <th scope="col">ID Usuario</th>
+        <tr>            
             <th scope="col">Nombre</th>
             <th scope="col">Telefono</th>
             <th scope="col">Perfil</th>
+            <th scope="col">Cedulas</th>
+            <th scope="col">Especialidades</th>
             <th scope="col">Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($doctor as $doctor)
-        <tr id="{{$doctor->id_usuario}}">
-                <td>{{$doctor->id_usuario}}</td>
-                <td>{{$doctor->nombre}} {{$doctor->primer_apellido}}</td>
-                <td>{{$doctor->telefono}}</td>
-                <td>{{$doctor->perfil}}</td>
+        <tr id="{{$doctor->id_usuario}}">                
+                <td>{{$doctor->nombre}} {{$doctor->app}}</td>
+                <td>{{$doctor->telefono}}</td>                
+                <td>{{$doctor->perfil == 1? "Administrador":($doctor->perfil == 2? "Usuario" : "Médico")}}</td>
+                <td>{{$doctor->cedulas}}</td>
+                <td>{{$doctor->especialidades}}</td>
                 <td>
                     <button class="btn btn-outline-secondary btn-sm" id="{{$doctor->id_usuario}}">
                         Ver Más Detalles

@@ -31,7 +31,6 @@
     </center>
 </div>
 <table class="table table-hover">
-    @foreach ($doctor as $doctor)
     <thead>
         <tr>
             <th scope="col">ID Usuario</th>
@@ -42,7 +41,8 @@
             <th scope="col">Acciones</th>
         </tr>
     </thead>
-    <tbody>        
+    <tbody> 
+    @foreach ($doctor as $doctor)       
         <tr >
             <td>{{$doctor->id_usuario}}</td>
             <td>{{$doctor->nombre}} {{$doctor->primer_apellido}}</td>
@@ -59,8 +59,8 @@
             <td colspan="6">
               <div id="info{{$doctor->id_usuario}}"></div> 
             </td>
-          </tr> 
-    </tbody>
+        </tr> 
     @endforeach
+    </tbody>
   </table>
 @endsection

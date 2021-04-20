@@ -8,6 +8,9 @@ use App\Usuarios;
 use App\EmergenciasModel;
 use App\CitasModel;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 
 class AdminController extends Controller
 {    
@@ -27,7 +30,21 @@ class AdminController extends Controller
         else{
             return redirect()->route("login");
         }
-    }    
+    }
+
+    public function editusu($id){
+        return view('admin.modificar', ['edit'=> Usuarios::findOrFail($id)]);
+    }
+
+    public function exportExcel(){
+        return Excel::download(new UsersExport, 'user-list.xlsx');
+    }
+    public function importExcel(Request $request){
+        $file = $request->file('file');
+        Excel::import(new UsersImport, $file);
+        return redirect('admin/usuarios');
+    }
+
     public function emergencias(){
         $tip_usu = session('session_tipo');        
         if($tip_usu == 1){
@@ -51,9 +68,8 @@ class AdminController extends Controller
         }        
     }
     public function usuarios(){
-        $usuarios = DB::table('tb_usuarios')                        
-                        ->groupBy('perfil')->get();
-        return view('admin.usuarios', $usuarios);
+        $usuarios = DB::table('usuarios')->get();
+        return view('admin.usuarios')->with('usuarios', $usuarios);
     }
     public function registro(){
         $tip_usu = session('session_tipo');        
@@ -76,17 +92,21 @@ class AdminController extends Controller
     {
         $usu = new Usuarios;
         $usu->nombre = request('nombre');
-        $usu->apellido_paterno = request('app');
-        $usu->apellido_materno = request('apm');
+        $usu->app = request('app');
+        $usu->apm = request('apm');
         $usu->telefono = request('telefono');
-        $usu->zona = "Lerma";
+        $usu->municipio = "Lerma";
         $usu->email = request('email');
         $usu->password = request('password');
         $usu->perfil = request('perfil');
         $usu->cedulas = request('cedulas');
         $usu->especialidades = request('especialidades');
-        $usu->precio_consulta = request('precio_consulta');
-        $usu->precio_consulta_dom = request('precio_consulta_dom');
+        $usu->pconsulta = request('precio_consulta');
+        $usu->pconsulta_dom = request('precio_consulta_dom');
+        $usu->ccalle = request('consultorio_calle');
+        $usu->ccolonia = request('consultorio_colonia');
+        $usu->clocalidad = request('consultorio_localidad');
+        $usu->cmunicipio = request('consultorio_municipio');
         if($request->hasFile('foto')){
             $file = $request->foto;
             $file->move(public_path(). '/img', $file->getClientOriginalName());
@@ -120,10 +140,8 @@ class AdminController extends Controller
     public function editu($id)
     {
         $tip_usu = session('session_tipo');        
-        if($tip_usu == 1){
-            //return view('home', ['usuario'=> User::findOrFail($id)]);
+        if($tip_usu == 1){            
             return view('admin.modificarusur', ['edit'=> Usuarios::findOrFail($id)]);
-            //return response()->json(['edit' => Usuarios::findOrFail($id)]);   
         }
         else{
             return redirect()->route("login");
@@ -142,8 +160,8 @@ class AdminController extends Controller
     public function updateusu(Request $request, $id){
         $usu = Usuarios::findOrFail($id);
         $usu->nombre = request('nombre');
-        $usu->apellido_paterno = request('app');
-        $usu->apellido_materno = request('apm');
+        $usu->app = request('app');
+        $usu->apm = request('apm');
         $usu->telefono = request('telefono');
         $usu->perfil = request('perfil');
         $usu->update();
@@ -153,9 +171,10 @@ class AdminController extends Controller
     public function updusu(Request $request, $id){
         $usu = Usuarios::findOrFail($id);
         $usu->nombre = request('name');
-        $usu->apellido_paterno = request('app');
-        $usu->apellido_materno = request('apm');
+        $usu->app = request('app');
+        $usu->apm = request('apm');
         $usu->telefono = request('telefono');
+        $usu->municipio = request('zona');
         $usu->update();
         //return response()->json(['usuarios' => $usu]);
         return redirect('admin/perfil');
@@ -193,10 +212,10 @@ class AdminController extends Controller
         $cita->fecha_cita = request('fecha');
         $cita->hora_cita = request('hora');
         $cita->telefono_contacto = request('telefono_contacto');
-        $cita->direccion_calle = request('direccion_calle');
-        $cita->direccion_colonia = request('direccion_colonia');
-        $cita->direccion_localidad = request('direccion_localidad');
-        $cita->direccion_municipio = request('direccion_municipio');        
+        $cita->dcalle = request('direccion_calle');
+        $cita->dcolonia = request('direccion_colonia');
+        $cita->dlocalidad = request('direccion_localidad');
+        $cita->dmunicipio = request('direccion_municipio');        
         $cita->save();
         //return response()->json(['citas' => $cita]);
         return redirect('admin/historial/'. $cita->id_usuario);
@@ -204,12 +223,9 @@ class AdminController extends Controller
     public function historial($id){
         $tip_usu = session('session_tipo');        
         if($tip_usu == 1){
-            $datos    = CitasModel::select('tb_citas.id_cita', 'tb_citas.nombre_paciente', 'tb_citas.fecha_cita', 'tb_citas.apellido_paciente',
-                                            'tb_citas.hora_cita', 'tb_citas.estatus', 'tb_citas.tipo_cita',
-                                            'tb_usuarios.nombre', 'tb_usuarios.apellido_paterno')
-                                    ->join('tb_usuarios', 'tb_citas.id_medico', '=', 'tb_usuarios.id_usuario')
-                                    ->where('tb_citas.id_usuario', '=', '1')
-                                    ->get();
+            $datos    = CitasModel::select('citas.id_cita', 'citas.nombre_paciente', 'citas.fecha_cita', 'citas.apellido_paciente',
+                            'citas.hora_cita', 'citas.estatus', 'citas.tipo_cita','usuarios.nombre', 'usuarios.app')
+                        ->join('usuarios', 'citas.id_medico', '=', 'usuarios.id_usuario')->where('citas.id_usuario', '=', $id)->get();
             return view('admin.historial')->with(['datos' => $datos]);
             //return response()->json(['datos' => $datos]);        
         }
@@ -219,13 +235,27 @@ class AdminController extends Controller
     }
     public function modificarc($id){
         $tip_usu = session('session_tipo');        
-        if($tip_usu == 1){
-            return view('admin.modificarc', ['datos'=> CitasModel::findOrFail($id)]);
+        if($tip_usu == 1){            
+            $datos = CitasModel::select('citas.id_cita','citas.nombre_paciente', 'citas.fecha_cita', 'citas.apellido_paciente', 'citas.costo_cita',
+                'citas.hora_cita', 'citas.telefono_contacto','citas.dcalle', 'citas.dcolonia', 'citas.dlocalidad', 'citas.dmunicipio',
+                'usuarios.nombre', 'usuarios.app', 'usuarios.pconsulta', 'usuarios.pconsulta_dom', 'usuarios.ccalle', 'usuarios.ccolonia', 'usuarios.clocalidad', 'usuarios.cmunicipio')
+                ->join('usuarios', 'citas.id_medico', '=', 'usuarios.id_usuario')->where('citas.id_cita', '=', $id)->get();
+            return view('admin.modificarc')->with(['datos' => $datos]);
             //return response()->json(['datos'=> CitasModel::findOrFail($id)]);            
         }
         else{
             return redirect()->route("login");
-        }        
+        }
+    }
+    public function detallesc($id){
+        $tip_usu = session('session_tipo');        
+        if($tip_usu == 1){
+            return view('admin.detallesc', ['datos'=> CitasModel::findOrFail($id)]);
+            //return response()->json(['datos'=> CitasModel::findOrFail($id)]);            
+        }
+        else{
+            return redirect()->route("login");
+        }
     }
     public function updcita(Request $request, $id){           
         $cita = CitasModel::findOrFail($id);
@@ -235,14 +265,20 @@ class AdminController extends Controller
         $cita->costo_cita = request('costo_cita');
         $cita->fecha_cita = request('fecha');
         $cita->hora_cita = request('hora');
-        $cita->estatatus = "pendiente";
+        $cita->estatus = "pendiente";
         $cita->telefono_contacto = request('telefono_contacto');
-        $cita->direccion_calle = request('direccion_calle');
-        $cita->direccion_colonia = request('direccion_colonia');
-        $cita->direccion_localidad = request('direccion_localidad');
-        $cita->direccion_municipio = request('direccion_municipio');        
+        $cita->dcalle = request('direccion_calle');
+        $cita->dcolonia = request('direccion_colonia');
+        $cita->dlocalidad = request('direccion_localidad');
+        $cita->dmunicipio = request('direccion_municipio');        
         $cita->update();
         //return response()->json(['citas' => $cita]);
         return redirect('admin/historial/'. $cita->id_usuario);
+    }
+    public function cancelar(Request $request, $id){
+        $cita = CitasModel::findOrFail($id);
+        $cita->estatus = 'cancelada';
+        $cita->update();
+        return redirect('admin/historial/1');
     }
 }

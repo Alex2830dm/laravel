@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Usuarios;
 use App\EmergenciasModel;
+use App\CitasModel;
 
 class JqueryController extends Controller
 {
@@ -28,5 +29,12 @@ class JqueryController extends Controller
         $usus    = Usuarios::where('id_usuario', '=', $id_usuario)->get();
         //dd($usus);
         return view("jquery/js_03")->with(['usus' => $usus]);
+    }
+    public function js04(Request $request){
+        $id_cita  = $request->get('id_cita');    
+        //dd($id_usuario);    
+        $usus    = CitasModel::where('id_cita', '=', $id_cita)->get();
+        //dd($usus);
+        return view("jquery/js_04")->with(['usus' => $usus]);
     }
 }

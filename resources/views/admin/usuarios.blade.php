@@ -30,9 +30,25 @@
   </center>
 </div>
     <div class="container">
-      <a href="{{url('admin/registro')}}">
-        <button type="button" class="btn btn-outline-info btn-sm">Registrar Nuevo</button>
-      </a><br>
+      <div class="row">
+        <div class="col-4">
+          <a href="{{url('admin/registro')}}">
+            <button type="button" class="btn btn-outline-info btn-sm">Registrar Nuevo</button>
+          </a>
+        </div>
+        <div class="col-4">
+          <a href="{{ route ('users.excel')}}">
+            <button type="button" class="btn btn-outline-success btn-sm">Exportar Usuarios</button>
+          </a>
+        </div>
+        <div class="col-4">
+          <form method="POST" action="{{route ('users.import.excel')}}" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control form-control-sm">
+            <input type="submit" value="Importar Usuarios" class="btn btn-outline-secondary btn-sm">
+          </form>
+        </div>
+      </div>                
+      <br>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -51,7 +67,7 @@
                 <img src="{{asset('img/'.$usuario->foto)}}" height="70">
               </td>
               <td>{{$usuario->id_usuario}}</td>
-              <td><?php echo $usuario->apellido_paterno . ' ' . $usuario->apellido_materno . ' ' . $usuario->nombre; ?></td>
+              <td><?php echo $usuario->app  . ' ' . $usuario->apm . ' ' . $usuario->nombre; ?></td>
               <td>{{$usuario->telefono}}</td>
               <td>{{$usuario->perfil == 1? "Administrador":($usuario->perfil == 2? "Usuario" : "Medico")}}</td>
               <td>               

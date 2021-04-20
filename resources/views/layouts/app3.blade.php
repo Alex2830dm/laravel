@@ -17,6 +17,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="{{asset('js/jquery-3.3.1.js')}}"></script> <!--Jquery - Funciones -->
   <script src="{{asset('js/jquery-ui.js')}}"></script>    <!--Jquery - Theme  q-->
+  @yield('scripts')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -170,7 +171,15 @@
                 </a>
               </li>
             </ul>
-          </li>          
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{{url('/paypal/pay')}}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Pago de Membresia                
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

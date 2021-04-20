@@ -36,18 +36,16 @@
             <th scope="col">ID Usuario</th>
             <th scope="col">Nombre</th>
             <th scope="col">Telefono</th>
-            <th scope="col">Cedula(s)</th>            
-            <th scope="col">Especialiad(es)</th>
+            <th scope="col">Perfil</th>
             <th scope="col">Acciones</th>
         </tr>
     </thead>
     <tbody>        
         <tr >
             <td>{{$doctor->id_usuario}}</td>
-            <td>{{$doctor->nombre}} </td>
-            <td>{{$doctor->telefono}}</td>
-            <td>{{$doctor->cedulas}}</td>
-            <td>{{$doctor->especialidades}}</td>
+                <td>{{$doctor->nombre}} {{$doctor->primer_apellido}}</td>
+                <td>{{$doctor->telefono}}</td>
+                <td>{{$doctor->perfil}}</td>
             <td>
                 <button class="btn btn-outline-secondary btn-sm" id="{{$doctor->id_usuario}}">
                     Ver Más Detalles

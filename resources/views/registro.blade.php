@@ -118,7 +118,7 @@
                 <div class="col-8">
                   <label for="name">Nombre: </label>  
                   <input type="text" name="nombre" id="nombre" class="form-control">
-                  <td><span id="sname" class="sname">Error: en el nombre !!!</span></td>
+                  <td><span id="sname" class="sname">Error: en el nombre !!!</span></td>                  
                 </div>
               </div>
               <div class="form-group row justify-content-center">
@@ -138,8 +138,8 @@
                   <td><span id="stel" class="stel"></span></td>
                 </div>
                 <div class="col-4">
-                  <label for="Zona">Zona: </label>
-                  <input type="text" name="zona" id="zona" class="form-control">
+                  <label for="Zona">Municipio: </label>
+                  <input type="text" name="municipio" id="municipio" class="form-control">
                 </div>
               </div>
               <div class="form-group row justify-content-center">
@@ -154,7 +154,19 @@
                   <td><span id="spass" class="spass"></span></td>
                 </div>
               </div>
-              <input type="numbre" name="perfil" id="perfil" class="form-control" value="1" hidden readonly>
+              <input type="numbre" name="perfil" id="perfil" class="form-control" value="Usuario" hidden readonly>
+              <div class="form-group row justify-content-center">
+                <div class="col-2">
+                  <input type="radio" name="sexo" value="Masculino">Masculino
+                </div>
+                <div class="col-2">
+                  <input type="radio" name="sexo" value="Femenino">Femenino
+                </div>
+                <div class="col-2">
+                  <input type="radio" name="sexo" value="Prefiere no decirlo">Prefiero No Decirlo
+                </div>
+                </div>
+              </div>
               <div class="form-group row justify-content-center">
                 <div class="col-6">
                   <label for="text">Foto de Perfil: </label>

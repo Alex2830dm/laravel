@@ -106,13 +106,13 @@
     </div><br><hr>
     <div class="row">
         <div class="col-4">
-            <input type="submit" value="Actualizar Cita" class="btn btn-success">
-        </div>
-        <div class="col-4">
-            <input type="reset" value="Cancelar" class="btn btn-danger">
-        </div>
+            <input type="submit" value="Actualizar Cita" class="btn btn-outline-success">
+        </div>        
     </div>
-    </form>
+    </form> 
+    <a href="{{url('usuario/historial')}}">
+        <button class="btn btn-outline-danger">Cancelar</button>
+    </a>
     @endforeach
 </div>
 @endsection

@@ -43,7 +43,7 @@
     <tbody>        
         <tr >
             <td>{{$doctor->id_usuario}}</td>
-                <td>{{$doctor->nombre}} {{$doctor->primer_apellido}}</td>
+                <td>{{$doctor->nombre}} {{$doctor->app}}</td>
                 <td>{{$doctor->telefono}}</td>
                 <td>{{$doctor->perfil}}</td>
             <td>

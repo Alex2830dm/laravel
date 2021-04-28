@@ -27,29 +27,23 @@ Route::name('primeros_auxilios')->get('primeros_auxilios', function(){ return vi
 Route::get('/paypal/pay', 'PaymentController@payWithPaypal');
 Route::get('/paypal/status', 'PaymentController@payPalStatus');
 
-Route::group(['prefix' => 'emergenciass'], function(){    
-    Route::patch('usuariosupdate/{id}', 'AdminController@updateusu')->name('usuariosupdate');
-    Route::delete('usuariosdelete/{id}', 'AdminController@destroyusu');
-    Route::delete('emerdelele/{id}', 'AdminController@destroyemer');    
-});
-
 //---------------------------- Usuario ----------------
 Route::prefix('usuario')->group(function () {
-    Route::get('perfil', 'UsuariosController@perfil');
+    Route::get('perfil', 'SystemController@perfil');
     Route::get('modificar/{id}', 'UsuariosController@editusu');
     Route::patch('usuarioupd/{id}', 'UsuariosController@updusu');
 
-    Route::get('doctores/', 'UsuariosController@docs');
+    Route::get('doctores/', 'SystemController@doctores');
     Route::name('js02')->get('js02/', 'JqueryController@js02');
-    Route::name('citas')->get('citas/{id}', 'UsuariosController@datosd');
-    Route::name('registrocita')->post('registrocita', 'UsuariosController@registrocita');
-    Route::name('historial')->get('historial', 'UsuariosController@historial');    
-    Route::get('modificar_cita/{id}', 'UsuariosController@modificarc');
-    Route::get('detalles/{id}', 'UsuariosController@detallesc');
-    Route::patch('updatec/{id}', 'UsuariosController@updcita');
-    Route::patch('cancelar/{id}', 'UsuariosController@cancelar');
+    Route::name('citas')->get('citas/{id}', 'SystemController@datosd');
+    Route::name('registrocita')->post('registrocita', 'SystemController@registrocita');
+    Route::name('historial')->get('historial', 'SystemController@historial');    
+    Route::get('modificar_cita/{id}', 'SystemController@modificarc');
+    Route::get('detalles/{id}', 'SystemController@detallesc');
+    Route::patch('updatec/{id}', 'SystemController@updcita');
+    Route::patch('cancelar/{id}', 'SystemController@cancelar');
 
-    Route::get('emergencias/', 'UsuariosController@emer');        
+    Route::get('emergencias/', 'SystemController@emergencias');        
 });
 Route::prefix('admin')->group(function () {
     Route::get('perfil', 'AdminController@perfil')->name('perfil');
@@ -84,7 +78,7 @@ Route::prefix('admin')->group(function () {
 
 
 Route::prefix('medico')->group(function () {
-    Route::get('perfil', 'MedicosController@perfil');
+    Route::get('perfil', 'SystemController@perfil');
     Route::get('modificar/{id}', 'MedicosController@editmed');
     Route::patch('update/{id}', 'MedicosController@updmed');
 

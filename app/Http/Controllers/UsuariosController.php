@@ -150,7 +150,7 @@ class UsuariosController extends Controller
         
     }    
     public function modificarc($id){
-        $tip_usu = session('session_tipo');        
+        $tip_usu = session('session_tipo');
         if($tip_usu == 2){
             $datos = CitasModel::select('citas.id_cita','citas.nombre_paciente', 'citas.fecha_cita', 'citas.apellido_paciente', 'citas.costo_cita',
                 'citas.hora_cita', 'citas.telefono_contacto','citas.dcalle', 'citas.dcolonia', 'citas.dlocalidad', 'citas.dmunicipio',

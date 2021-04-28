@@ -144,7 +144,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('usuario/historial/'.session('session_id'))}}" class="nav-link">
+                <a href="{{url('usuario/historial/')}}" class="nav-link">
                   <p>Historial de Consultas</p>
                 </a>
               </li>

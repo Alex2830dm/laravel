@@ -92,13 +92,13 @@
         <div class="row">
             <div class="col-8">
                 Observaciones:
-                <textarea name="observaciones" id="observaciones" cols="5" rows="" value="{{$datos->observaciones}}" class="form-control" readonly></textarea>
+                <textarea name="observaciones" id="observaciones" cols="5" rows="" class="form-control" readonly>{{$datos->observaciones}}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-8">
                 Medicamentos:
-                <textarea name="medicamentos" id="medicamentos" cols="5" rows="" value="{{$datos->medicamentos}}" class="form-control" readonly></textarea>
+                <textarea name="medicamentos" id="medicamentos" cols="5" rows="" class="form-control" readonly>{{$datos->medicamentos}}</textarea>
             </div>
         </div>
         <br><hr>        

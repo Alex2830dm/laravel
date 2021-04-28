@@ -41,12 +41,12 @@
             <button type="button" class="btn btn-outline-success btn-sm">Exportar Usuarios</button>
           </a>
         </div>
-        <div class="col-4">
+        <!--<div class="col-4">
           <form method="POST" action="{{route ('users.import.excel')}}" enctype="multipart/form-data">
             <input type="file" name="file" class="form-control form-control-sm">
             <input type="submit" value="Importar Usuarios" class="btn btn-outline-secondary btn-sm">
           </form>
-        </div>
+        </div>-->
       </div>                
       <br>
       <table class="table table-hover">

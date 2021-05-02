@@ -9,6 +9,7 @@ use App\EmergenciasModel;
 use App\DoctoresModel;
 use App\CitasModel;
 use App\Http\Requests\UsuariosRequest;
+use App\Http\Requests\CitasRequest;
 
 class SystemController extends Controller
 {
@@ -67,7 +68,7 @@ class SystemController extends Controller
     public function registro(){
         return view('registro');
     }
-    public function storeusu(UsuariosRequest $request){
+    public function storeusu(UsuariosRequest $request){              
         $usu = new Usuarios;
         $usu->nombre = request('nombre');
         $usu->app = request('app');
@@ -151,7 +152,7 @@ class SystemController extends Controller
         }     
     }
     //registro de consulta/cita
-    public function registrocita(Request $request){
+    public function registrocita(CitasRequest $request){
         $tip_usu = session('session_tipo');
         $cita = new CitasModel;
         $cita->id_medico = request('id_medico');

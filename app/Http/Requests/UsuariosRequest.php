@@ -24,16 +24,12 @@ class UsuariosRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre',
-            'app',
-            'app',
-            'telefono',
-            'municipio',
-            'email',
-            'password',
-            'sexo',
-            'telefono',
-            'foto'
+            'nombre' => 'required|min:6',
+            'app' => 'required',
+            'telefono' => 'required',
+            'municipio' => 'required',
+            'email' => 'required|email',
+            'pass' => 'required|min:6',
         ];
     }
 }

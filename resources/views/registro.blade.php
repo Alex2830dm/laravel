@@ -10,6 +10,9 @@
       var formato = /^[A-Za-z\_\-.\s\xF1\xD1]+$/;
       if(formato.test(txtname)){
         $("#nombre").css({"border": "1px solid #0F0"})
+        $("span.sname").css({
+          "visibility": "hidden"
+        });
       }else{
         $("#nombre").css({"border": "1px solid #F00"})
         $("span.sname").css({
@@ -46,16 +49,18 @@
         $("#smail").text("incorrecto");
       }
     });
-    //----------------------------
-    $("span.stel").css({ "visibility": "hidden" });
+    //----------------------------    
     $("#telefono").keyup(function(){      
       var tel = $("#telefono").val();      
       if(tel.length < 10){
         $("#telefono").css({"color": "#FF0707"});
         $("#stel").text("Tiene que contener 10 digitos");
+        $("span.stel").css({ "visibility": "visible" });
       }else if(tel.length == 10){
         $("#telefono").css({"color": "#0FC714", "border": "1px solid #0FC714"});
+        $("span.stel").css({ "visibility": "hidden" });
       }else{
+        $("span.stel").css({ "visibility": "visible" });
         $("#telefono").css({"color": "#FF0707"});
         $("span.stel").text("Solo debe contener 10 digitos");
       }
@@ -118,14 +123,16 @@
                 <div class="col-8">
                   <label for="name">Nombre: </label>  
                   <input type="text" name="nombre" id="nombre" class="form-control">
-                  <td><span id="sname" class="sname">Error: en el nombre !!!</span></td>                  
+                  <td><span id="sname" class="sname">Error: en el nombre !!!</span></td>
+                  {!! $errors->first('nombre', '<small>:message</small><br>') !!}
                 </div>
               </div>
               <div class="form-group row justify-content-center">
                 <div class="col-4">
                   <label for="app" >Primer Apellido: </label>
-                  <input type="text" name="app" id="app" class="form-control">                  
-                </div>                  
+                  <input type="text" name="app" id="app" class="form-control">
+                  {!! $errors->first('app', '<small>:message</small><br>') !!}
+                </div>
                 <div class="col-4">
                   <label for="apm">Segundo Apellido: </label>
                   <input type="text" name="apm" id="apm" class="form-control">                  
@@ -136,22 +143,26 @@
                   <label for="telefono">Telefono: </label>
                   <input type="text" name="telefono" id="telefono" class="form-control">
                   <td><span id="stel" class="stel"></span></td>
+                  {!! $errors->first('telefono', '<small>:message</small><br>') !!}
                 </div>
                 <div class="col-4">
-                  <label for="Zona">Municipio: </label>
+                  <label for="Zona">Municipio: </label>                  
                   <input type="text" name="municipio" id="municipio" class="form-control">
+                  {!! $errors->first('municipio', '<small>:message</small><br>') !!}
                 </div>
               </div>
               <div class="form-group row justify-content-center">
                 <div class="col-4">
                   <label for="email">E-mail: </label>
-                  <input type="mail" name="email" id="email" class="form-control">
+                  <input type="email" name="email" id="email" class="form-control">
                   <td><span id="smail" class="smail"></span></td>
+                  {!! $errors->first('email', '<small>:message</small><br>') !!}
                 </div>
                 <div class="col-4">
                   <label for="pass">Password: </label>
                   <input type="password" name="pass" id="pass" class="form-control">
                   <td><span id="spass" class="spass"></span></td>
+                  {!! $errors->first('pass', '<small>:message</small><br>') !!}
                 </div>
               </div>
               <input type="numbre" name="perfil" id="perfil" class="form-control" value="Usuario" hidden readonly>

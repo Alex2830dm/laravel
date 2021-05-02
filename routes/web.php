@@ -60,7 +60,7 @@ Route::prefix('admin')->group(function () {
     Route::name('js01')->get('js01/', 'JqueryController@js01');
     Route::get('citas/{id}', 'AdminController@datosd');
     Route::get('historial/{id}', 'AdminController@historial');
-    Route::post('registrocita', 'AdminController@registrocita');
+    Route::post('registrocita', 'SystemController@registrocita');
     Route::get('modificar_cita/{id}', 'AdminController@modificarc');
     Route::get('detalles/{id}', 'AdminController@detallesc');
     Route::patch('updatec/{id}', 'AdminController@updcita');

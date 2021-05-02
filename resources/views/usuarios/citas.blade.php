@@ -57,9 +57,12 @@
         <div class="row">
             <div class="col-4">
                 Nombre del paciente: <input type="text" name="nombre_paciente" value="{{session('session_name')}}" class="form-control">
+                {!! $errors->first('nombre_paciente', '<small>:message</small><br>') !!}
+
             </div>
             <div class="col-4">
                 Apellidos del paciente: <input type="text" name="apellidos_paciente" value="{{session('session_app')}} {{session('session_apm')}}" class="form-control">
+                {!! $errors->first('apellidos_paciente', '<small>:message</small><br>') !!}
             </div>
         </div>
         <div class="row">
@@ -67,6 +70,7 @@
                 Selecciona el tipo de cita <br>
                 <input type="radio" id="tipo_cita" name="tipo_cita" value="consultorio"> En consultorio    
                 <input type="radio" id="tipo_cita2" name="tipo_cita" value="domicilio"> A domicilio
+                {!! $errors->first('tipo_cita', '<small>:message</small><br>') !!}
             </div>
             <div class="col-4">
                 Costo cita <input type="text" name="costo_cita" id="costo_cita" class="form-control" readonly>
@@ -75,30 +79,37 @@
         <div class="row">
             <div class="col-2">
                 Fecha consulta <input type="date" name="fecha" value="{{now()->toDateString('Y-m-d')}}" class="form-control">
+                {!! $errors->first('fecha', '<small>:message</small><br>') !!}
             </div>
             <div class="col-2">
                 Hora consulta <input type="text" name="hora" class="form-control" placeholder="HH:MM:SS">
+                {!! $errors->first('hora', '<small>:message</small><br>') !!}
             </div>
             <div class="col-4">
                 Telefono de contacto del paciente: <input type="text" value="{{session('session_telefono')}}" class="form-control" name="telefono_contacto">
+                {!! $errors->first('telefono_contacto', '<small>:message</small><br>') !!}
             </div>
         </div>
         <div class="row">
             <div class="col-8">
                 Calle: <input type="text" name="direccion_calle" class="form-control" id="d1">
+                {!! $errors->first('direccion_calle', '<small>:message</small><br>') !!}
             </div>
         </div>
         <div class="row">
             <div class="col-4">
                 Colinia: <input type="text" name="direccion_colonia" class="form-control" id="d2">
+                {!! $errors->first('direccion_colonia', '<small>:message</small><br>') !!}
             </div>
             <div class="col-4">
                 Localidad: <input type="text" name="direccion_localidad" class="form-control" id="d3">
+                {!! $errors->first('direccion_localidad', '<small>:message</small><br>') !!}
             </div>
         </div>
         <div class="row">
             <div class="col-4">
                 Municipio: <input type="text" name="direccion_municipio" class="form-control" id="d4">
+                {!! $errors->first('direccion_municipio', '<small>:message</small><br>') !!}
             </div>            
         </div><br><hr>
         <div class="row">

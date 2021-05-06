@@ -23,8 +23,16 @@ class UsersImport implements ToModel
             'email' => $row[5],
             'password' => $row[6],
             'perfil' => $row[7],
-            'sexo' => $row[8],            
-            'foto' => $row[9]
+            'sexo' => $row[8],  
+            'cedulas' => $row[9],
+            'especialidades' => $row[10],
+            'pconsulta' => $row[11],
+            'pconsulta_dom' => $row[12],
+            'ccalle' => $row[13],
+            'ccolonia' => $row[14],
+            'clocalidad' => $row[15],
+            'cmunicipio' => $row[16],            
+            'foto' => $row[17]
         ]);
     }
 }

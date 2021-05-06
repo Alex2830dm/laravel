@@ -31,22 +31,35 @@
 </div>
     <div class="container">
       <div class="row">
-        <div class="col-4">
-          <a href="{{url('admin/registro')}}">
-            <button type="button" class="btn btn-outline-info btn-sm">Registrar Nuevo</button>
-          </a>
+        <table>
+          <tr>
+            <td>
+              <a href="{{url('admin/registro')}}">
+                <button type="button" class="btn btn-outline-info btn-sm">Registrar Nuevo</button>
+              </a>
+            </td>
+            <td>
+              <a href="#">
+                <button type="button" class="btn btn-outline-danger btn-sm">Exportar Usuarios en PDF</button>
+              </a>
+            </td>
+            <td>
+              <a href="{{ route ('users.excel')}}">
+                <button type="button" class="btn btn-outline-success btn-sm">Exportar Usuarios en Excel</button>
+              </a>
+            </td>
+            <form method="POST" action="{{route ('users.import.excel')}}" enctype="multipart/form-data">
+              @csrf
+              <td>
+                <input type="file" name="file" class="form-control form-control-sm">
+              </td>
+              <td>
+                <input type="submit" value="Importar Usuarios" class="btn btn-outline-secondary btn-sm">
+              </td>
+            </form>            
+          </tr>
+        </table>                
         </div>
-        <div class="col-4">
-          <a href="{{ route ('users.excel')}}">
-            <button type="button" class="btn btn-outline-success btn-sm">Exportar Usuarios</button>
-          </a>
-        </div>
-        <!--<div class="col-4">
-          <form method="POST" action="{{route ('users.import.excel')}}" enctype="multipart/form-data">
-            <input type="file" name="file" class="form-control form-control-sm">
-            <input type="submit" value="Importar Usuarios" class="btn btn-outline-secondary btn-sm">
-          </form>
-        </div>-->
       </div>                
       <br>
       <table class="table table-hover">

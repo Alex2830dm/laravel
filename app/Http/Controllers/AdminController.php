@@ -37,7 +37,7 @@ class AdminController extends Controller
     }
 
     public function exportExcel(){
-        return Excel::download(new UsersExport, 'user-list.xlsx');
+        return Excel::download(new UsersExport, 'user-list.xlsx');                
     }
     public function importExcel(Request $request){
         $file = $request->file('file');

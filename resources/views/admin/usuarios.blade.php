@@ -1,4 +1,16 @@
 @extends('layouts.app2')
+@section('buscador')
+<form class="form-inline ml-3">
+  <div class="input-group input-group-sm">
+    <input class="form-control form-control-navbar" type="search" name="buscar" placeholder="Buscar" aria-label="Buscar">
+    <div class="input-group-append">
+      <button class="btn btn-navbar" type="submit">
+        <i class="fas fa-search"></i>
+      </button>                  
+    </div>
+  </div>              
+</form>
+@endsection
 @section('content')
 <script type="text/javascript">                        
   $(document).ready(function(){
@@ -39,7 +51,7 @@
               </a>
             </td>
             <td>
-              <a href="#">
+              <a href="export-list-pdf">
                 <button type="button" class="btn btn-outline-danger btn-sm">Exportar Usuarios en PDF</button>
               </a>
             </td>
@@ -57,7 +69,7 @@
                 <input type="submit" value="Importar Usuarios" class="btn btn-outline-secondary btn-sm">
               </td>
             </form>            
-          </tr>
+          </tr>        
         </table>                
         </div>
       </div>                

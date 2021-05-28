@@ -34,6 +34,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contacto</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        @yield('buscador')
+      </li>
     </ul>
 
     <!-- Right navbar links -->

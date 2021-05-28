@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class AdminController extends Controller
 {    
@@ -19,18 +20,32 @@ class AdminController extends Controller
         return view('admin.modificar', ['edit'=> Usuarios::findOrFail($id)]);
     }
 
-    public function exportExcel(){
+    public function exportExcel() {
         return Excel::download(new UsersExport, 'user-list.xlsx');                
     }
-    public function importExcel(Request $request){
+    public function importExcel(Request $request) {
         $file = $request->file('file');
         Excel::import(new UsersImport, $file);
         return redirect('admin/usuarios');
     }
+    public function exportPDF() {
+        $users = Usuarios::all();
+        $pdf = PDF::loadView('admin.PDF', compact('users'));
+
+        return $pdf->download('user-list-pdf.pdf');
+    }
     
-    public function usuarios(){
-        $usuarios = DB::table('usuarios')->get();
-        return view('admin.usuarios')->with('usuarios', $usuarios);
+    public function usuarios(Request $request){
+        if($request){
+            $query = trim($request->get('buscar'));
+            $users = Usuarios::where('nombre', 'LIKE', '%' . $query . '%')
+                    ->orderBy('id_usuario', 'asc')
+                    ->get();
+            return view('admin.usuarios', ['usuarios' => $users, 'buscar' => $query]);
+        }
+
+        //return view('admin.usuarios')->with('usuarios', $usuarios);
+
     }
     public function registro(){
         $tip_usu = session('session_tipo');        

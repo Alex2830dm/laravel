@@ -46,7 +46,7 @@ Route::prefix('usuario')->group(function () {
     Route::get('emergencias/', 'SystemController@emergencias');        
 });
 Route::prefix('admin')->group(function () {
-    Route::get('perfil', 'AdminController@perfil')->name('perfil');
+    Route::get('perfil', 'SystemController@perfil')->name('perfil');
     Route::get('modificar/{id}', 'AdminController@editusu');
     Route::patch('update/{id}', 'AdminController@updusu');
     Route::name('usuarios')->get('usuarios/', 'AdminController@usuarios');
@@ -55,8 +55,9 @@ Route::prefix('admin')->group(function () {
     Route::delete('usuariosdelete/{id}', 'AdminController@destroyusu');
     Route::get('admin/user-list', 'AdminController@exportExcel')->name('users.excel');
     Route::post('impor-list-excel', 'AdminController@importExcel')->name('users.import.excel');
+    Route::get('export-list-pdf', 'AdminController@exportPDF');
 
-    Route::get('doctores/', 'AdminController@doctores');
+    Route::get('doctores/', 'SystemController@doctores');
     Route::name('js01')->get('js01/', 'JqueryController@js01');
     Route::get('citas/{id}', 'AdminController@datosd');
     Route::get('historial/{id}', 'AdminController@historial');
